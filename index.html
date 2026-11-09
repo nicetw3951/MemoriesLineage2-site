@@ -1,0 +1,2925 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="懷舊の天堂｜資料查詢專區" />
+  <meta property="og:description" content="重溫天堂經典感動！探索最新設定、職業數值、特色副本與完整活動指南。" />
+  <meta property="og:image" content="https://nicetw3951.github.io/MemoriesLineage-site/Image/Title.jpg" />
+  <meta property="og:url" content="https://nicetw3951.github.io/MemoriesLineage-site/" />
+  <meta property="og:type" content="website" />
+  <title>懷舊の天堂｜官方資料查詢專區</title>
+  
+  <style>
+    /* ==================== 全域基礎重置 ==================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary-blue: #1b73ba;
+      --primary-blue-dark: #0d5289;
+      --accent-purple: #6f42c1;
+      --accent-gold: #ffcc00;
+      --accent-red: #d90429;
+      --bg-dark: #121316;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --font-main: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Segoe UI", Roboto, sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: var(--font-main);
+      background-color: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; /* 防止整頁出現雙重滾動條 */
+      color: #2b2b2b;
+    }
+
+    /* ==================== 頂部品牌橫幅 (Brand Banner) ==================== */
+    .brand-bar {
+      position: relative;
+      width: 100%;
+      min-height: 110px;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
+      flex-shrink: 0;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .brand-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('Image/banner.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      opacity: 0.85;
+    }
+
+    .company-name {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #4facfe 0%, #a18cd1 50%, #fbc2eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 15px rgba(138, 43, 226, 0.8));
+      text-align: center;
+      margin: 0 10px;
+    }
+
+    /* ==================== 頂部導航按鈕列 (Header Nav) ==================== */
+    .header-nav {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr); /* 電腦版固定每排 10 顆按鈕 */
+      gap: 7px;
+      padding: 10px 18px;
+      background-color: #000;
+      background-image: url('Image/banner.jpg');
+      background-repeat: repeat-x;
+      background-position: center;
+      background-size: cover;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      border-bottom: 2px solid #000;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 10px rgba(0, 0, 0, 0.6);
+      z-index: 90;
+      flex-shrink: 0;
+    }
+
+    .header-nav button {
+      width: 100%;
+      padding: 8px 4px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      background: linear-gradient(180deg, #1b73ba 0%, #0d5289 100%);
+      color: #ffffff;
+      border: 1px solid #083c66;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .header-nav button:hover {
+      background: linear-gradient(180deg, #258cdb 0%, #1063a5 100%);
+      border-color: #1a78c2;
+      box-shadow: 0 0 8px rgba(37, 140, 219, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .header-nav button.active {
+      background: linear-gradient(180deg, #2e9bf5 0%, #1063a5 100%);
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      color: #fffffa;
+      transform: translateY(-1px);
+    }
+
+    /* ==================== 主要內容展示區 (Content Area) ==================== */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem 1.5rem 6rem 1.5rem;
+      background-color: #16171b;
+      background-image: url('Image/background.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center 100px;
+      background-repeat: no-repeat;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .content-box {
+      max-width: 1100px;
+      margin: 0 auto;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(4px);
+      border-radius: 12px;
+      padding: 28px 32px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+      line-height: 1.85;
+      animation: contentFadeIn 0.3s ease;
+    }
+
+    @keyframes contentFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 各種文字層級與醒目標記 (保留原本 class 相容性) */
+    .title-main {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #3b1410;
+      text-align: center;
+      margin: 1.5rem 0;
+      line-height: 2.1;
+    }
+
+    .h2-purple {
+      font-size: 1.6rem;
+      color: var(--accent-purple);
+      font-weight: bold;
+      text-align: center;
+      padding: 0.5rem 0;
+    }
+
+    .h2-red {
+      font-size: 1.4rem;
+      color: var(--accent-red);
+      font-weight: bold;
+      text-align: left;
+      padding: 0.8rem 0 0.3rem 0;
+    }
+
+    .h2-blue {
+      font-size: 1.25rem;
+      color: #0056b3;
+      font-weight: bold;
+      text-align: left;
+      padding: 0.6rem 0 0.2rem 0;
+    }
+
+    .h2-green {
+      font-size: 1.2rem;
+      color: #198754;
+      font-weight: bold;
+      text-align: left;
+      padding: 0.5rem 0;
+    }
+
+    .data-block {
+      font-size: 1.15rem;
+      color: #333;
+      text-align: left;
+      padding: 0.5rem 0;
+      line-height: 1.75;
+    }
+
+    .text-gold {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ffcc00;
+      text-align: center;
+      padding: 1rem 0;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    .subtitle-red {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #cc0000;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+    }
+
+    .alert {
+      color: #28a745;
+      font-size: 28px;
+      font-weight: bold;
+      animation: blink 1.2s infinite;
+      text-align: center;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+
+    /* 表格排版防溢出容器 */
+    .rune-table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+
+    /* 各類動作按鈕 */
+    .download-btn {
+      background-color: #28a745;
+      color: #ffffff;
+      border: none;
+      padding: 9px 18px;
+      margin: 6px 6px 6px 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(40, 167, 69, 0.35);
+      transition: all 0.2s ease;
+    }
+    .download-btn:hover {
+      background-color: #218838;
+      box-shadow: 0 4px 10px rgba(40, 167, 69, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .download-btn-red {
+      background-color: #dc3545;
+      color: #ffffff;
+      border: none;
+      padding: 9px 18px;
+      margin: 6px 6px 6px 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .download-btn-red:hover {
+      background-color: #c82333;
+      transform: translateY(-2px);
+    }
+
+    .download-btn-orange {
+      background-color: #fd7e14;
+      color: #ffffff;
+      border: none;
+      padding: 9px 18px;
+      margin: 6px 6px 6px 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .download-btn-orange:hover {
+      background-color: #e96b00;
+      transform: translateY(-2px);
+    }
+
+    .download-btn-purple {
+      background-color: #6f42c1;
+      color: #ffffff;
+      border: none;
+      padding: 9px 18px;
+      margin: 6px 6px 6px 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .download-btn-purple:hover {
+      background-color: #5a32a3;
+      transform: translateY(-2px);
+    }
+
+    /* ==================== 浮動入口 (LINE社群與贊助) ==================== */
+    .Show-Site {
+      position: fixed;
+      top: 52%;
+      right: 20px;
+      transform: translateY(-50%);
+      z-index: 990;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .Show-Site:hover {
+      transform: translateY(-50%) scale(1.05);
+    }
+    .Show-Site img {
+      width: 110px;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .site-text {
+      margin-top: 6px;
+      color: #00e000;
+      font-size: 14px;
+      font-weight: 800;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+      white-space: nowrap;
+    }
+
+    .donate-box {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 990;
+    }
+    .donate-btn {
+      background: linear-gradient(45deg, #6a5acd, #00bfff);
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      padding: 11px 22px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(106, 90, 205, 0.6);
+      transition: all 0.3s ease;
+    }
+    .donate-btn:hover {
+      box-shadow: 0 6px 25px rgba(0, 191, 255, 0.9);
+      transform: scale(1.06);
+    }
+
+    /* ==================== 彈窗樣式 (優化防阻擋) ==================== */
+    .modal, .info-modal {
+      display: none;
+      position: fixed;
+      z-index: 2500;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(3px);
+    }
+    .modal-content {
+      background: #ffffff;
+      margin: 12vh auto;
+      padding: 28px;
+      border-radius: 12px;
+      width: 330px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: modalFadeIn 0.25s ease;
+    }
+    .info-modal-wrapper {
+      position: relative;
+      background: #ffffff;
+      margin: 4vh auto;
+      width: 90%;
+      max-width: 920px;
+      max-height: 90vh;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+      animation: modalFadeIn 0.25s ease;
+    }
+    .close, .info-modal-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #666;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      line-height: 32px;
+      text-align: center;
+      z-index: 10;
+      transition: all 0.2s ease;
+    }
+    .info-modal-close-btn {
+      background: rgba(255, 255, 255, 0.85);
+    }
+    .close:hover, .info-modal-close-btn:hover {
+      color: #000;
+      background: #e5e5e5;
+    }
+    .info-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      max-height: calc(90vh - 40px);
+      -webkit-overflow-scrolling: touch;
+      color: #333;
+    }
+    .faq-modal-iframe {
+      width: 100%;
+      height: calc(88vh - 40px);
+      border: none;
+      display: block;
+    }
+    .qrcode {
+      width: 200px;
+      margin-top: 15px;
+      border-radius: 6px;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==================== 手機與平板專用響應式 (<= 768px) ==================== */
+    @media (max-width: 768px) {
+      .brand-bar {
+        min-height: 70px;
+        height: 9vh;
+      }
+      .company-name {
+        font-size: 1.75rem;
+        padding: 0.2rem 1rem;
+      }
+      .header-nav {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        padding: 8px 10px;
+      }
+      .header-nav button {
+        padding: 6px 2px;
+        font-size: 0.78rem;
+        letter-spacing: -0.5px;
+      }
+      .content {
+        padding: 1rem 0.8rem 5rem 0.8rem;
+      }
+      .content-box {
+        padding: 18px 16px;
+      }
+      .Show-Site {
+        top: auto;
+        bottom: 75px;
+        right: 15px;
+        transform: none;
+      }
+      .Show-Site:hover {
+        transform: none;
+      }
+      .Show-Site img {
+        width: 52px;
+      }
+      .site-text {
+        font-size: 12px;
+      }
+      .donate-box {
+        bottom: 18px;
+        right: 15px;
+      }
+      .donate-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+      .info-modal-wrapper {
+        width: 95%;
+        margin: 3vh auto;
+        max-height: 94vh;
+      }
+      .info-modal-body {
+        padding: 16px;
+      }
+    }
+  </style>
+
+  <script>
+    const List = [
+      "更新內容", "遊戲設定", "特色介紹", "職業介紹", "地圖介紹",
+      "武器介紹", "防具介紹", "飾品介紹", "道具介紹", "變身卡介紹",
+      "娃娃介紹", "下載專區", "贊助相關", "遊戲內容Q&A", "疑難雜症",
+      "待更新", "待更新", "待更新", "待更新", "待更新"
+    ];
+    const API_URL = "https://script.google.com/macros/s/AKfycbw9mAM_Br8ZlFn5CWL0E9Q3JSkHilINtl0R9-B-G_ipeGrUuoxVP0JWSwJ6X1b6oiXT/exec";
+    
+    let commentInterval = null;
+    let currentQuestionId = null;
+
+    // 保留完整原本的 DATA 內容 (數據零遺失)
+    const DATA = [
+      // 0: 更新內容
+      `
+	  <span class="h2-green"></span>
+      <span class="h2-red">《 公告 》點擊查看</span><br>
+	  <button class="download-btn" onclick="openBountySheriffDesc()">※江湖懸賞活動※</button>
+	  <button class="download-btn" onclick="openBossSkillDesc()">※BOSS多重施法說明※</button>
+      <button class="download-btn" onclick="openCastleWar()">※周六八點奇岩攻城戰※</button>
+      <button class="download-btn" onclick="openSurvivalEvent()">※每日九點大逃殺※</button>
+      <button class="download-btn" onclick="openAcademyBattle()">※每日九點二十分學院戰場※</button>
+      <button class="download-btn" onclick="open9clock40event()">※每日九點四十分寶藏地宮※</button>
+      <button class="download-btn" onclick="open10clockevent()">※每日十點無限大賽※</button>
+      <button class="download-btn" onclick="openTimeClockevent()">※每日定時獎勵怪出沒※</button>
+      <button class="download-btn" onclick="openClanComeIn()">※AT團申請※</button><BR><BR>
+	  
+	  <span class="h2-blue">★★ 2026/11/08 更新內容 ★★</span><br>
+      <span class="data-block">學院戰場修正，有神聖Buff狀態，攻擊守護塔與據點首領，不會附加血量百分比<BR>
+	  學院戰場新舊版本重點提醒：活耀度達標評定改為貢獻分達標，對話窗會顯示進度百分比<BR>
+	  三大爭奪點、擊殺玩家、怪物，皆可獲取貢獻分<BR>
+	  玩家死亡不再被奪取積分，獲取九大評比項目第一(每人限制一項)，可獲取學院幣<BR>
+	  戰場內一般頻道只有隊友可看見，隊友不在畫面中仍會顯示在對話窗<BR>
+	  結算時學院總積分較低為輸方，勝方將奪取輸方20%總積分來分配<BR>
+	  修正傳送容易判定失敗問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/11/06 更新內容 ★★</span><br>
+      <span class="data-block">學院戰場2.0全新改版上線，詳細資訊可至上方查看，以下簡單介紹<BR>
+	  個人積分與學院硬幣獲取方式調整，活耀判定改為貢獻分決定，小怪調整主動攻擊<BR>
+	  新增【奪劍護送】、【守塔爭奪】、【據點爭奪】等搶分機制，結算獲勝學院將奪取對方學院20%積分<BR>
+	  學院硬幣改為九大項目排名第一的玩家可獲取。<BR>
+	  修復隱身角色無法正常看到其他角色移動問題<BR>
+	  屍魂塔副本新增計時器於左上方<BR>
+	  強化城堡守護者之塔強度<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/11/03 更新內容 ★★</span><br>
+      <span class="data-block">穿雲箭調整畫面裡有其他血盟玩家也可使用<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/23 更新內容 ★★</span><br>
+      <span class="data-block">殺人搶錢正式更名江湖懸賞活動，並新增掛機死亡可設定自動復活，詳情可至上方公告查看<BR>
+	  殺人不會下地獄，掛機死亡仍有死亡懲罰，謹慎選擇是否設定自動復活<BR>
+	  主城等級排行榜更換為江湖公佈欄，可查詢江湖相關資訊<BR>
+	  修復部分技能卡機率不符預期問題<BR>
+	  調整變形魔杖隨機變身的造型，不再有會脫掉裝備<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/19 更新內容 ★★</span><br>
+      <span class="data-block">調整偵測網路延遲與防外掛機制<BR>
+	  修復祝福武防卷點+0~+2裝備，會機率跳+1~+3，點+3~+4裝備，會機率跳+1~+2<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/18 更新內容 ★★</span><br>
+      <span class="data-block">修正學院戰場問題，並恢復被攻擊會有受傷動作<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/15 更新內容 ★★</span><br>
+      <span class="data-block">修復三段加速器偶爾無法正常加速問題，並且可正常解除緩速狀態<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/13 更新內容 ★★</span><br>
+      <span class="data-block">調整隊伍穿雲箭，原設定範圍內有其他血盟成員，一律禁止使用->新增排除隊友是其他血盟成員則不影響<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/11 更新內容 ★★</span><br>
+      <span class="data-block">修正學院戰場死亡會出現玩家真實ID問題<BR>
+	  學院戰場地圖調整嚴格偵測外掛，包含施法無動作、打完收刀等影響平衡的功能<BR>
+	  學院管理員新增可查看活動戰績表功能<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/10 更新內容 ★★</span><br>
+      <span class="data-block">無限大戰的最終BOSS部分過強調降，降低攻擊與施法頻率，調整多重施法模式並於公告新增多重施法說明，方便玩家討伐<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/08 更新內容 ★★</span><br>
+      <span class="data-block">學院戰場新增偵測防洗分機制，嚴重情況會有懲罰，勿取巧謀取自身利益<BR>
+	  學院戰場調整擊殺積分小於50分玩家，不給予學院硬幣獎勵<BR>
+	  學院戰場調整擊殺積分大於100分玩家，隨機一位助攻者給予1枚硬幣(若無助攻則給予擊殺者)，所有助攻者額外給予1積分，以及學院積分2積分<BR>
+	  學院警衛調整為2位，並增強傷害，強化重生區的保護<BR>
+	  學院召喚的BOSS-暗黑刀神Jr，限制不能離開出生點太遠<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/07 更新內容 ★★</span><br>
+      <span class="data-block">中秋節活動道具回收，感謝各位參與<BR>
+	  學院戰場測試調整，戰場玩家受到傷害不會有受傷動作，減少假性加速問題<BR>
+	  學院戰場死亡被搶積分調整最多被搶20分，降低戰死的代價<BR>
+	  消耗品商人新增背包整理道具<BR>
+	  修正屍魂塔四王容易斷線問題、修正怪物會定格不能攻擊問題<BR>
+	  調整網路防護機制減少斷線問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/06 更新內容 ★★</span><br>
+      <span class="data-block">修正穿雲箭玩家無法重疊問題<BR>
+	  學院管理員商店新增屬性點與天賦點<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/05 更新內容 ★★</span><br>
+      <span class="data-block">BOSS追蹤術調整為可與BOSS重疊<BR>
+	  修復BOSS偶發無掉落物問題<BR>
+	  若有怪物在定格狀態無法攻擊，可在WHO頁面或對話欄輸入解錯位，可刷新怪物與角色的錯位現象<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/10/04 更新內容 ★★</span><br>
+      <span class="data-block">學院戰場新增禁止使用復活<BR>
+	  技能卡功能調整，玩家攻擊玩家的情況(PVP)，裝備遠距武器的玩家，所有技能卡觸發機率減半，對怪物則不影響<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/27 更新內容 ★★</span><br>
+      <span class="data-block">屍魂塔第四關BOSS調整不會二段變身，避免閃退斷線問題<BR>
+	  修正裝備插卡的減傷效果，使用戰鬥力探測器查詢會正確顯示<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/25 更新內容 ★★</span><br>
+      <span class="data-block">修復高寵運作問題，高寵傷害調高50%->60%<BR>
+	  高寵新增幫自身與主人自動解除木乃伊的詛咒，未學習聖潔之光會改用聖潔之光卷軸<BR>
+	  調整BOSS道館進場前，會先自動解除高寵狀態，入場後可再度設定高寵狀態<BR>
+	  修復夢幻之島內掛會穿牆亂走問題<br>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/24 更新內容 ★★</span><br>
+      <span class="data-block">無限大戰最終BOSS新增掉落物，☆☆☆爆氣祕法材料<BR>
+	  新增☆☆☆爆氣祕法製作於多功能製作NPC，幸運草可提高機率，並於展示區展示功能<BR>
+	  新增高寵系統(測試版)，9/28重啟後消失，可於元寶一般商人購買<BR>
+	  可設定一位高寵玩家跟隨，協助補血、放狀態與普攻打怪，高寵傷害會下降<BR>
+	  啟用高寵會消耗掛機時數，詳細說明於啟動視窗內顯示<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/22 更新內容 ★★</span><br>
+      <span class="data-block">無限大戰月中樵夫．吳剛調高魔消命中率<BR>
+	  減少掉寶、強化、合成、開箱的廣播數量，避免廣播過於雜亂<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/20 更新內容 ★★</span><br>
+      <span class="data-block">調整學院戰場販賣的魔力藥水恢復量提升150->200<BR>
+	  學院戰場玩家的助攻學院積分額外+1<BR>
+	  新增可查詢額外天賦點數的NPC，位於成就NPC旁<BR>
+	  無限大戰更換最終BOSS-月中樵夫．吳剛<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/16 更新內容 ★★</span><br>
+      <span class="data-block">修復妖精傷害穿透天賦與娃娃穿透效果不會並存問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/13 更新內容 ★★</span><br>
+      <span class="data-block">屍魂塔關閉內掛，避免玩家使用內掛穿牆影響公平性<BR>
+	  新增遊戲內技能卡名稱，顯示插入洞後出現的[單字]<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/12 更新內容 ★★</span><br>
+      <span class="data-block">騎士天賦：神聖壁壘-改為必定觸發，正面3方向傷害每點降低3%<BR>
+	  騎士天賦：聖法之盾-改為滿級後，即使魔力為0仍可降低25%傷害，開啟時會有特效顯示<BR>
+	  衝擊之暈秒數下修3~6秒->3~5秒<BR>
+	  王族天賦：榮耀治癒-下修每點8%->4%，暴君血脈-開啟時會有特效顯示<BR>
+	  妖精天賦：精通能量-鋼鐵防護調整為觸發絕對防護傷害降為零，傷害穿透-近戰機率上調每點+2.5%<BR>
+	  黑妖天賦：背刺襲擊-傷害上調每點傷害10%->15%，劇毒強化-中毒傷害額外附加自身力量<BR>
+	  龍騎士天賦：強之護鎧-減傷上調每點降低1.5%->2%<BR>
+	  幻術天賦：痛苦化身-機率上調每點3%->5%，衝擊封印-機率上調每點1%->1.5%<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/09/08 更新內容 ★★</span><br>
+      <span class="data-block">WHO頁面-個人選項，新增學院戰場特效開關<BR>
+	  優化畫面資訊過多時，會造成延遲的影響<BR>
+	  </span><BR>
+      <span class="h2-blue">★★ 2026/08/28 更新內容 ★★</span><br>
+      <span class="data-block">新增登入遊戲時，身上金幣大於10億，會自動轉換成金條，避免金幣數量超過上限消失<BR></span>
+	  <BR>
+      <span class="h2-blue">★★ 2026/08/24 更新內容 ★★</span>
+        <span class="data-block">惡棍地痞調整為只能對他使用普攻才能造成傷害<BR>
+        修正中元節成就提升內容，文字敘述錯誤問題<BR></span>
+      <BR>
+	  <span class="h2-blue">★★ 2026/08/22 更新內容 ★★</span><br>
+	  <span class="data-block">元寶商人新增深淵通行證【七天】<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/19 更新內容 ★★</span><br>
+	  <span class="data-block">調整小瑪莉下注大於等於30，即可加速開獎<BR>
+	  修復部分技能自身施放與技能卡有共用CD的狀況<BR>
+	  防具介紹頁面新增附魔光圈新圖案<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/17 更新內容 ★★</span><br>
+	  <span class="data-block">修正製作與重置附魔光圈寶盒的錯誤問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/16 更新內容 ★★</span><br>
+	  <span class="data-block">小瑪莉新增下注大於等於50注，則加快開獎速度<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/15 更新內容 ★★</span><br>
+	  <span class="data-block">調整部分技能CD過低的問題<BR>
+	  調整對話窗不再顯示穿透訊息，改為雷擊特效詮釋<BR>
+	  修正幻術師穿透雷擊特效顯示的問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/14 更新內容 ★★</span><br>
+	  <span class="data-block">陰曹地府怪物復活時間縮短25%，普通地圖怪物增加50%<BR>
+	  商店魔法結晶體調整為販賣一組15個，方便大量購買的玩家<BR>
+	  學院管理員販賣新增個人BUFF勳章，功能與WHO頁面相同，僅方便快捷鍵使用<BR>
+	  調整穿透效果，改為雷擊特效<BR>
+	  </span><BR>
+	  <details><summary><span class="h2-blue">以前更新內容-點擊展開</span></summary><br>
+	  <span class="h2-blue">★★ 2026/08/13 更新內容 ★★</span><br>
+	  <span class="data-block">中元節活動鬼門開8/13至9/10鬼門關，NPC、集字幣、陰間銀幣將於9/14重啟後回收<BR>
+	  每天可至副本區-陰曹地府傳送口，限量擊殺500隻怪物，每擊殺數量怪物會召喚BOSS，地圖只會有一隻BOSS<BR>
+	  分普通與深淵難度，普通怪物不主動，深淵怪物主動且強度高，掉落率則提高兩倍<BR>
+	  進入深淵需購買元寶商人的深淵通行證才可進入，重啟後會消失，普通區可使用隊伍穿雲箭，深淵區則禁止使用穿雲箭<BR>
+	  主城廣場新增中元節活動NPC，可購買活動道具與製作道具。<BR>
+	  王族天賦調整-暴君血脈滿級傷害下降80%->70%，幻術觸發魔法穿透(職業+娃娃)也可穿透聖結界<BR>	  
+	  法師攜帶娃娃觸發魔法穿透可穿透聖結界，天賦致命一擊僅對玩家可穿透聖結界<BR>
+	  奪命之雷命中率調整等級(大於70%/等於60%/小於40%)，破壞盔甲命中率調整等級(大於70%/等於60%/小於40%)<BR>
+	  學院戰場普攻限制單下最大傷害5000，破軍Buff真傷仍可額外疊加<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/11 更新內容 ★★</span><br>
+	  <span class="data-block">神廟雙蛇新增掉落道具，八大長老令牌，以及爆氣秘法殘頁上、下<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/08 更新內容 ★★</span><br>
+	  <span class="data-block">修正妖精三重矢的延遲錯誤，原設定0.1秒實際仍為1秒延遲，調整為0.5秒延遲<BR>
+	  修正光環會有殘留問題<BR>
+	  小瑪莉重新調整機率，並公開各水果機率，所有小水果與續轉10.1%，蘋果5.4%，橘子4.7%，檸檬3.3%，香蕉2.5%，半瓜1.4%，西瓜1%，小BAR0.8%，大BAR0.4%<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/07 更新內容 ★★</span><br>
+	  <span class="data-block">感謝各位對伺服器的支持，臨時加辦父親節活動8/7-8/9維修後結束，【全地圖】怪物4%機率掉落父親的錢袋<BR>
+	  加速偵測機制調整，當異常次數達標的玩家，將會被系統自動鎖帳號30天，若有被誤鎖的可來客服處理<BR>
+	  新增戰鬥力偵測器可以查看木頭人的屬性面板，若有需要增加不同能力的木頭人，可在LINE群提出<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/05 更新內容 ★★</span><br>
+	  <span class="data-block">木頭人調整顯示傷害相關資料，更換一個不同的木頭人，高防禦高血量提供測試<BR>
+	  部分玩家反應有人開加速的狀況，調整偵測機制若抓到異常數據，將會限制登入，勿以身試法<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/03 更新內容 ★★</span><br>
+	  <span class="data-block">無限大戰每波間隔統一調整為2分鐘，活動至十點三十分，怪物仍未擊殺則自動回收<BR>
+	  學院戰場主要為活人參與的活動，將修正為無活躍判定，則無法獲取任何積分，減少因掛機造成雙方戰力的影響<BR>
+	  大逃殺活動傳送調整為兩個地圖位置，傳送師與活動NPC為兩個不同的入口點，減少無法走出人群問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/08/02 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場教官修正死亡問題<BR>
+	  大逃殺活動結束後，調整離開傳送點，避免在主城卡位<BR>
+	  調整掛機時無法使用爆氣<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/31 更新內容 ★★</span><br>
+	  <span class="data-block">王族天賦-暴君血脈，使用遠距武器傷害降3成(80%->56%)<BR>
+	  噬靈附魔石調整，機率上升15%->(15+Lv)%、吸魔量上升Lv*2->Lv*4<BR>
+	  水屬性卷軸調整觸發機率與回魔量上升，請至道具介紹查看<BR>
+	  修復錯誤：王族暴君血脈滿級打人傷害未修正80%，學院戰場純BUFF未新增25%補正命中率<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/30 更新內容 ★★</span><br>
+	  <span class="data-block">反擊屏障機率下降60%->35% 武器傷害下降15倍->6倍，三重矢傷害+10%<BR>
+	  王族天賦-暴君血脈滿級受到傷害下降40%->35%<BR>
+	  屠宰者附加力量值*弱點[1.5倍，2倍，3倍]的隨機傷害(三刀都附加)<BR>
+	  白金娃娃觸發穿透會顯示特效與穿透訊息<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/29 更新內容 ★★</span><br>
+	  <span class="data-block">反擊屏障機率上升30%->60% 武器傷害上升4倍->15倍，三重矢技能CD下降0.2->0.1<BR>
+	  學院戰場調整小怪戰利品直接給玩家，小BOSS與大BOSS仍掉落在地上<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/28 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場新增投票機制，廣播開始前5分鐘，於學院管理員開放投票，點選模式投入票箱，1.原學院入場 2.隨機分學院(個人) 3.隨機分學院(組隊)<BR>
+	  每人只有一票，可重新投票以最後一次為準，活動開始從票箱挑出最高1、2名，再從中抽出模式，無人投票則隨機三選一<BR>
+	  學院戰場調整更容易觸發弱勢判定，新增結算時即使無活耀也可獲取個人積分<BR>
+	  長時間無參與戰鬥，活耀判定會自動取消，需要重新觸發活耀判定，擊殺1200召喚的暗黑刀神Jr，改在中央廣場周邊(避免出在雙方區域)<BR>
+	  職業調整妖精三重矢新增0.2秒CD時間(技能卡無CD)，妖精天賦精通能量滿級機率上修10%->15%<BR>
+	  王族天賦-暴君血脈滿級傷害下降100%->80%，受到傷害上升30%->40%<BR>
+	  調整白金變身卡：赫發斯特斯、格拉狄翁穿脫不中斷攻擊<BR>
+	  調整無限大戰最終BOSS新行為模式同時降低攻擊頻率，新增被打無動作、多重施法、距離增傷等機制<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/26 更新內容 ★★</span><br>
+	  <span class="data-block">調整無限大戰最終BOSS攻擊模式<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/24 更新內容 ★★</span><br>
+	  <span class="data-block">新增4種白金娃娃，於娃娃卡合成商人製作/重置，可至展示區查看娃娃能力<BR>
+	  元寶強化商人新增雙屬性裝備分解槌、BOSS附魔徽章分解槌<BR>
+	  修正WHO頁面裡，傳送/穿雲箭開關訊息顯示錯誤問題<BR>
+	  新增並更換無限大戰最終BOSS<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/22 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場調整弱勢啟動會維持1分鐘，新增弱勢第2階段，學院積分與殺人數落差太大時啟動，擊殺怪物獲取積分再提高<BR>
+	  弱勢第2階段，破軍學院：賦予高增傷、高機率無視禦守BUFF打出原始傷害，禦守學院：高機率絕對防禦與反彈傷害<BR>
+	  雙方學院BUFF狀態皆會提升命中率，提升方式重新調整->無弱勢：+25%，弱勢Lv1：+50%，弱勢Lv2：+75%<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/21 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場新增組隊入場機制，組隊會一起入場，並分配到相同學院<BR>
+	  修復活動地圖內傳送造成的卡點問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/20 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場新增助攻機制：目標陣亡前15秒內，曾對其造成傷害者，助攻數+1(擊殺者不計算)，4助攻=1擊殺。<BR>
+	  學院戰場結算時擊殺獎勵積分，調整為總積分30%->40%，全學員均分調整為總獎勵70%->60%。<BR>
+	  黑妖職業強化，新增每一轉生，雙刀爆擊率額外+1%<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/19 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場新增掉落物擁有者，有10秒的優先時間，時間過後則所有人都可撿取<BR>
+	  學院戰場小弟金幣數量略為調降，擊殺玩家搶奪積分調整為20%，弱勢學院打小弟額外提高1點個人積分。<BR>
+	  學院戰場調整每擊殺30->50個小弟，會召喚一個大大<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/18 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場調整，進場時改為隨機均分學院人數，戰場BUFF以分配的學院賦予能力，禦守弱勢新增50%未命中修正<BR>
+	  學院戰場調整戰利品掉落於地面，需要手動撿取，沒有優先權任何人都可以撿取，小弟金幣數量調升。<BR>
+	  學院戰場新增每擊殺30個小弟，會召喚一個大大，擊殺1200個，在戰場某處會召喚暗黑刀神Jr<BR>
+	  學院戰場新增掉落道家九秘典籍、道家九秘法寶，可製作九字真言技能卡，除小弟以外皆會掉落，學院硬幣也可購買<BR>
+	  製作區-技能卡製作，新增九字真言製作盒，可至展示區看卡片能力<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/17 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場新增在場內時，會隨機更換光圈與爆氣顏色，僅更改外觀不影響能力<BR>
+	  調整玩家死亡時倒地仍維持變身外觀<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/14 更新內容 ★★</span><br>
+	  <span class="data-block">修復爆氣系統造成的異常問題<BR>
+	  學院戰場警衛新增商店，販賣魔力藥水與戰場玉米<BR>
+	  新增元寶變卷商人，販賣白金變卷<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/12 更新內容 ★★</span><br>
+	  <span class="data-block">新增Boss挑戰2館(元寶)，請詳細閱讀入場收費及說明，1館無任何變更，僅提供入場說明<BR>
+	  新增金幣-變卷商人販賣白金變卷，變卷擁有跑速與攻速，沒有變身卡的裝備能力<BR>
+	  下載專區提供LinhelperZ的設定檔，可在沒有變身時，自動使用白金變卷<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/10 更新內容 ★★</span><br>
+	  <span class="data-block">修正學院戰場上方BOSS平台安全區改為戰鬥區域<BR>
+	  學院戰場大BOSS新增魔法消除負面技能，另出現大BOSS時，多一個明顯廣播訊息<BR>
+	  /WHO頁面個人設定，新增強化廣播選項，所有廣播改分對話框與橫幅兩種<BR>
+	  傳送師新增召喚塔2區<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/08 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場上方BOSS平台安全區改為戰鬥區域(仍顯示安全區後續修正)<BR>
+	  修復玩家傷害會異常提升的問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/07 更新內容 ★★</span><br>
+	  <span class="data-block">端午活動已落幕，全數回收祭品：銀粽子，感謝各位玩家參與<BR>
+	  小瑪莉NPC回歸到商店區，移除端午限定商人<BR>
+	  小瑪莉商店新增金粽子LV1與粽子強化卷軸<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/05 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場的教官活動範圍小幅增加<BR>
+	  墓穴墳場怪物量增加30%，怪物復活時間縮短20%<BR>
+	  克隆實驗室開放技能卡4區與3區環境相同<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/04 更新內容 ★★</span><br>
+	  <span class="data-block">修復學院戰場教官攻擊特效導致斷線問題<BR>
+	  學院戰場小怪不主動，但同伴被打會反擊，大小BOOS為主動<BR>
+	  拍賣場調整脛甲改為防具分類<BR>
+	  修復禦守學院部分能力未提升問題<BR>
+	  元寶一般商品新增販賣轉學證書<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/03 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場復活點附近，新增各學院守護NPC，且無法離開重生點太遠<BR>
+	  學院戰場暗黑刀神JR調整，不會離開上方出生點太遠<BR>
+	  修復學院商店無法購買問題，修復戰場10元寶個人狀態遺漏問題<BR>
+	  優化玩家動作與怪物動作延遲、怪物AI邏輯，以及角色BUFF狀態時序同步調整<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/07/02 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場正式上線，新增全新裝備脛甲，在戰場內打怪獲取，學院管理員新增學院商店<BR>
+	  脛甲屬於一般裝備類，安定值0，可使用防卷強化+12，可上祝福、品階，不可擴孔<BR>
+	  脛甲獲取時附有獵紋α、β、γ屬性，屬性詳細請查看防具介紹，消耗品商店販賣獵紋分解錘，可將無用的脛甲分解<BR>
+	  學院戰場怪物調整金幣掉落量，小怪低機率掉落β且不會掉落γ、小BOSS中機率掉落β，極低機率掉落γ，大BOSS不會掉落α，50%機率β、γ<BR>
+	  擊殺玩家且有掠奪到積分，額外給予學院硬幣，可用於購買學院商店物品<BR>
+	  大BOSS調整為積分制，積分達5000可獲取學院硬幣<BR>
+	  製作區-功能性道具，新增獵魂數值隨機卷軸<BR>
+	  </span><BR>
+	  <span class="data-block">修正學院戰場不能入場問題，修正學院不在活動期間，不能更換學院的問題<BR>
+	  修正召喚怪會攻擊主人的問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/30 更新內容 ★★</span><br>
+	  <span class="data-block">活動時間調整，學院戰場調整為每日21:20-21:40，寶藏地宮調整為21:40-22:00<BR>
+	  學院戰場內容調整，當我方學院積分落後或與敵方平手時，滿足以下任一條件即會「啟動弱勢判定」<BR>
+	  1.人數弱勢：敵方人數達3人(含)以上，且我方人數低於敵方的60%(例：我方1人/敵方3人)<BR>
+	  2.戰況弱勢：雙方總擊殺數達10人以上，且我方擊殺數低於敵方的70%(例：我方4殺/敵方6殺)<BR>
+	  獲得弱勢判定後，會將學院BUFF強化(無須3人團隊也可獲得)，並且擊殺怪物額外獲取學院積分+1，「解除弱勢判定」當戰況發生以下任一改變，將立刻取消弱勢BUFF<BR>
+	  1.絕對反超：我方積分超越對方，或是擊殺數超越對方<BR>
+	  2.戰況回穩：我方場內人數追近至敵方的75%以上(60%->75%)，且擊殺數追近至敵方的85%以上(70%->85%)<BR>
+	  3.人數過少：敵方場內人數流失至不足3人<BR>
+	  弱勢學院BUFF說明，破軍：附加真實傷害加倍(150->300、三重矢50->100)，並且未命中變更為命中機率加倍(25%->50%)，禦守：觸發絕對防禦機率加倍(15%->30%)<BR>
+	  場內野怪調整，小怪出生點50%在中央廣場出沒，50%在地圖各處(含中央廣場)，小BOSS廣播通知出沒點，50%在中央廣場，50%在地圖各處(含中央廣場)<BR>
+	  新增學院戰場活動期間，禁止退出學院，新增玩家積分低於30不會被搶奪<BR>
+	  學院戰場封測版，積分仍會保留，※請注意※轉換陣營積分會歸零<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/29 更新內容 ★★</span><br>
+	  <span class="data-block">新增學院戰場地圖內無法使用戰鬥力探測器<BR>
+	  大逃殺活動地圖，娃娃將暫時變更為經驗公主(能力不變)，避免卡位<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/28 更新內容 ★★</span><br>
+	  <span class="data-block">今日發放小瑪莉回溯補償包，重啟前申請恢復的物品，若為全新物品於線上NPC領取，原有裝備則直接恢復屬性<BR>
+	  今日2359前還可申請恢復物品(回溯期間正常獲取的物品)，若已領取補償包並且打開者，則視同放棄恢復物品資格，恢復若有問題的通知客服處理<BR>
+	  學院戰場修復負面BUFF無法命中問題，神聖BUFF範圍人數判定改為10格(接近整個畫面)，城主王冠進場後會隱藏不再顯示<BR>
+	  學院戰場進場後娃娃外觀更換為經驗公主(能力不變)，用於隱藏娃娃並且不會擋路。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/27 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場活動調整，活動時間調整為20分鐘，活躍時間調整為10分鐘。<BR>
+	  破軍學院傳入點與復活點改為地圖左側，禦守學院傳入點與復活點改為地圖右側<BR>
+	  禦守學院神聖BUFF效果，觸發絕對防禦的反擊傷害調整，從原承受傷害50%傷害->100%傷害<BR>
+	  剛復活的玩家不會馬上被列入可主動攻擊的劍圖示<BR>
+	  小BOSS強度微幅調降，新增神聖BUFF狀態對小BOSS有效果，效果為普攻附加小BOSS最大生命值的5%固定傷害<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/26 更新內容 ★★</span><br>
+	  <span class="data-block">學院戰場封測今日開始，活動時間每天22:30-23:00廣播進場，由傳送師傳送，請先點選學院管理員加入學院。<BR>
+	  封測階段學院戰場的怪物僅掉落金幣，內容依照數據做調整，調整內容會公布於活動內頁，正式版上線後將會掉落全新裝備<BR>
+	  調整明顯化物品欄已裝備的圖示外框<BR>
+	  </span><BR>
+
+	  <span class="h2-blue">★★ 2026/06/25 更新內容 ★★</span><br>
+	  <span class="data-block">消耗品商店販賣的肉更換為烤薄餅，吃一個就滿飽食度<BR>
+	  大逃殺秘境怪物數量提升<BR>
+	  優化內掛尋怪模式並修復禮貌模式功能<BR>
+	  </span><BR>
+
+	  <span class="h2-blue">★★ 2026/06/24 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺-分隊廝殺，敵對互看對方為紫名，可直接攻擊不須按CTRL或開啟PK按鈕<BR>
+	  聖結界調整可幫同隊友施放，同血盟不同隊不可施放<BR>
+	  已修復更名卡道具，元寶一般商店開始販售<BR>
+	  </span><BR>
+
+	  <span class="h2-blue">★★ 2026/06/22 更新內容 ★★</span><br>
+	  <span class="data-block">調整傷害顯示可顯示MISS以及顯示到萬位數字，取消超過萬位數字會造成的特效圖<BR>
+	  修正掉寶/開箱廣播設定值無法儲存問題<BR>
+	  BOSS火焰之影第二階段、墮落移除會將玩家變身的魔法<BR>
+	  修正部分怪物未設定擊殺增加血盟能量<BR>
+	  </span><BR>
+
+	  <span class="h2-blue">★★ 2026/06/20 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺活動-分隊廝殺模式規則調整，僅調整當平手的情況<BR>
+	  兩隊總人數剛好或大於100人，當活動時間到仍未分出勝負，則計算雙方存活人數，存活較多的為勝方<BR>
+	  並且敗方存活數低於敗方總人數15%，改為有分出勝負(原為不分勝負)<BR>
+	  端午節限定商人新增販賣物品-金粽子Lv1<BR>
+	  WHO頁面開關選單，新增廣播分類-掉寶/開箱廣播可獨立開關<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/18 更新內容 ★★</span><br>
+	  <span class="data-block">調整瞬間移動卷軸的延遲，導致容易卡點問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/14 更新內容 ★★</span><br>
+	  <span class="data-block">調整白金變身卡，赫發斯特斯、格拉狄翁可穿脫中斷三重矢延遲，其餘改為不中斷攻擊<BR>
+	  調整汨羅江·屈原呼喚出來3小時後消失<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/13 更新內容 ★★</span><br>
+	  <span class="data-block">端午地圖BOSS汨羅江·屈原強度調降並更換圖檔，呼喚出來30分鐘後消失<BR>
+	  汨羅江·屈原新增掉落金粽子Lv.1<BR>
+	  端午地圖調整可使用穿雲箭<BR>
+	  金粽子等級調整，最後一階為Lv.Max<BR>
+	  </span><BR>
+
+	  <span class="h2-blue">★★ 2026/06/12 更新內容 ★★</span><br>
+	  <span class="data-block">端午節活動上線，活動至7/5重啟後關閉<BR>
+	  開放克隆實驗室-耳環2區，怪物數量與1區相同<BR>
+	  職業調整-幻術師奇古獸普攻穿透機率上調至30%<BR>
+	  修復80級死亡騎士內掛速度異常問題<BR>
+	  修正已開啟離線商店的角色，再次登入同帳號的其他角色，會先將離線商店登出，不會被系統鎖定登入<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/10 更新內容 ★★</span><br>
+	  <span class="data-block">修復/WHO 玩家名稱 查詢功能<BR>
+	  更名卡會造成倉庫問題，暫時關閉販售，後續修復後重新開賣<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/09 更新內容 ★★</span><br>
+	  <span class="data-block">調整擊殺小怪不會造成BOSS累積傷害重置問題<BR>
+	  戰鬥力探測器新增顯示對方職業與血盟<BR>
+	  新增/WHO 玩家名稱，等同使用戰鬥力探測器查詢玩家<BR>
+	  </span><BR>
+		<span class="h2-blue">★★ 2026/06/08 更新內容 ★★</span><br>
+	  <span class="data-block">拍賣場修正會顯示祝福物品<BR>
+	  拍賣場調整整組販賣顯示名稱，再次強調上架與購買的道具如有多個均為一整組<BR>
+	  調整裝備附魔顯示LV等級<BR>
+	  修復四龍器官箱異常問題<BR>
+	  修正成就系統紫色娃娃：惡魔提升素質的文字錯誤<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/06 更新內容 ★★</span><br>
+	  <span class="data-block">內掛功能追加禮貌模式<BR>
+	  無限大戰更換最終BOSS<BR>
+	  調整城堡將於攻城日當天重啟後回收，攻城獎勵調整為每人500懷舊幣與3百萬天幣，線上血盟成員自動發放<BR>
+	  煉金術士兌換魔法材料改為批量兌換並收取手續費<BR>
+	  新增裝備點爆贖回NPC，在元寶商人附近<BR>
+	  調整線上血盟人數達6人以上並且上傳盟徽，經驗加成+20%、金幣+10%<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/03 更新內容 ★★</span><br>
+	  <span class="data-block">掛機與怪物行為模式優化<BR>
+	  掛機裝備若被脫下，會先自動裝備上次的武器，成功會繼續運行，失敗則停止掛機<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/06/02 更新內容 ★★</span><br>
+	  <span class="data-block">九點大逃殺活動，新增左右木頭人旁，出現大逃殺報名NPC，分散人員壅擠狀況<BR>
+	  進入大逃殺活動後，寵物與召喚物會回收，避免造成主城壅擠<BR>
+	  開放AT團申請物資<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/31 更新內容 ★★</span><br>
+	  <span class="data-block">新增WHO頁面的個人開關設定、自動練功設定會自動儲存<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/29 更新內容 ★★</span><br>
+	  <span class="data-block">更換新主城，寵物與召喚怪可進入新主城，傳送師新增主城路標傳送點<BR>
+	  大逃殺報名改為傳送師進入，九點半活動傳送陣改在左右傳送師附近出現<BR>
+	  弱勢職業天賦調強，包含騎士、黑妖、龍騎士、幻術師，可至職業介紹查看<BR>
+	  惡棍地痞強度調整為新手也能擊殺，並改在說話之島或海賊島出現，掛機中與冰雪暴無法攻擊惡棍地痞<BR>
+	  職業天賦NPC對話窗，新增職業天賦說明<BR>
+	  修正自動掛機開始/關閉按鈕經常失靈問題<BR>
+	  優化光圈與爆氣特效<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/24 更新內容 ★★</span><br>
+	  <span class="data-block">屍魂塔開放使用掛機方便清怪，請勿放置掛機過久導致卡點順移，造成關卡無法正常請自行承擔<BR>
+	  屍魂塔BOSS傷害調降，掛機遇到屍魂塔BOSS不會順移<BR>
+	  火焰之影變身後怨念石，已自動更換為高階怨念袋<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/21 更新內容 ★★</span><br>
+	  <span class="data-block">調整測試玩家物理與魔法減免計算方式，將玩家整體防禦提升<BR>
+	  高階怨念袋含兩隻火焰之影(變身前與變身後)，修正只會抽到變身前，已有的變身後的怨念石，之後會自動更換為高階怨念袋<BR>
+	  修正拍賣場裝備可以看到插卡的卡片資訊<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/18 更新內容 ★★</span><br>
+	  <span class="data-block">修復血盟旗子招募異常問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/17 更新內容 ★★</span><br>
+	  <span class="data-block">小瑪莉商人販賣商品新增龍的血液<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/16 更新內容 ★★</span><br>
+	  <span class="data-block">懷舊幣商人販賣商品新增中階怨念袋<BR>
+	  移除NPC火焰之影的軍師，獲取的效果目前無用且會導致誤選<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/14 更新內容 ★★</span><br>
+	  <span class="data-block">修正插入防具的debuff技能卡，攻擊者是玩家時，未正確觸發debuff的問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/05/07 更新內容 ★★</span><br>
+	  <span class="data-block">生存商店的轉生屬性點調整為可以交易<BR>
+	  重新調整大逃殺活動傳送位置會產生偏移，避免擋路<BR>
+	  弱化墓穴墳場的墓穴魔蛛，並移除魔封、補血反向與召喚軍師等技能，降低狩獵難度<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/30 更新內容 ★★</span><br>
+	  <span class="data-block">修正生存活動-分隊廝殺未正確發放積分問題，另補償今日的生存活動積分額外增加30分，不正當手段離開活動地圖無法獲取<BR>
+	  調整大逃殺活動魔法屏障沒有任何效果(無法減傷與抵擋負面魔法)、分隊廝殺模式，負面魔法可對敵人施放<BR>
+	  賽狗場相關NPC修正文字錯誤，調整大戶廣播改為同一隻下注50張以上<BR>
+	  賽狗場縮短每場準備時間<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/29 更新內容 ★★</span><br>
+	  <span class="data-block">賽狗場為提高下注金額改用賽狗場代幣下注，透過NPC天幣與代幣兌換，無手續費<BR>
+	  賽狗場單次下注每10張賽狗票，可額外獲得1點賽狗場紅利(可交易)，用於購買紅利商店<BR>
+	  傳送師新增奇岩賽狗場傳送點<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/28 更新內容 ★★</span><br>
+	  <span class="data-block">完善賽狗場博弈機制，可查看預估勝率，賠率會隨下注額變動，下注超過100萬會廣播有大戶下注<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/27 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺活動，不是因為死亡而提前離場，僅能獲取參賽積分<BR>
+	  墓穴墳場開放隊伍穿雲箭，每日擊殺達標也可被穿雲進場，再次擊殺怪物後，仍會被傳送出場<BR>
+	  克隆實驗室開放技能卡3區，與1區、2區相比，怪物數量為2倍，購買費用較高<BR>
+	  武防擴孔區，怪物數量增加30%、復活時間縮短30%<BR>
+	  調整騎士與龍騎士對怪物造成的物理傷害提升10%<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/25 更新內容 ★★</span><br>
+	  <span class="data-block">調整BOSS挑戰館的廣播、倒數，挑戰開始後場內無存活的玩家，將無法再次進場<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/24 更新內容 ★★</span><br>
+	  <span class="data-block">推廣獎勵暫時關閉，新增惡棍地痞固定時間隨機地圖出沒，未擊殺會存在到重啟才會消失<BR>
+	  每日早晚 3、6、9、12點，【公告】海賊島或說話之島隨機出沒惡棍地痞100隻<BR>
+	  晚上7、8、10、11點，【公告】隨機地圖出沒惡棍地痞100隻<BR>
+	  會掉落遺留的袋子，可獲取懷舊幣、元寶與裝備強化類卷軸，在出沒地圖內還有惡棍地痞則會有廣播<BR>
+	  元寶商店販賣變更ID道具，一天限購一次，不可交易。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/23 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺BOSS生存模式調整，BOSS冰雪暴傷害微降，其餘魔法傷害微升，新增BOSS會施放聖結界<BR>
+	  討伐獎勵傷害達1萬獲得歷練寶冊(綁)，擊殺獲得高階怨念袋，當第一隻BOSS死亡，觸發進階模式會出現兩隻BOSS<BR>
+	  倖存者與戰神雙手劍，提高昏迷命中<BR>
+	  消耗品商店新增返生藥水，發生背包已滿未領取到可以補買<BR>
+	  新增BOSS挑戰館開場廣播<BR>
+	  墓穴魔蛛的獠牙提高掉落率<BR>
+	  修正戰神武器吸血問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/20 更新內容 ★★</span><br>
+	  <span class="data-block">功能性製作新增-職業天賦書(挑戰)<BR>
+	  提升奇古獸傷害，目標魔抗越高，提升幅度越多<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/18 更新內容 ★★</span><br>
+	  <span class="data-block">新增寶藏地宮每擊殺10隻好棒棒，與最後10隻好棒棒時，會顯示剩餘數量訊息<BR>
+	  修正職業天賦書的正確圖案<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/17 更新內容 ★★</span><br>
+	  <span class="data-block">爆氣秘法新增能力：機率抵擋BOSS的範圍負面魔法，數值可至展示區查看<BR>
+	  生存商店、小瑪莉商店、製作區-功能性道具，新增職業天賦書，每個編號一個角色只能使用一次，道具可以交易<BR>
+	  修正幻術師天賦-痛苦化身，血量50%以上也會觸發減傷。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/14 更新內容 ★★</span><br>
+	  <span class="data-block">屍魂塔副本新增時間提醒，每過1分鐘顯示訊息，通關與失敗會顯示花費的時間。<BR>
+	  增加地底湖伊萊克頓數量。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/12 更新內容 ★★</span><br>
+	  <span class="data-block">清明節活動魂珠商人、道具魂珠、冤魂煉化甕進行回收。<BR>
+	  清明節活動結束墓穴墳場將恢復原始狀態。<BR>
+	  優化BOSS雷達功能，可提供BOSS的方向與距離<BR>
+	  小瑪莉商人新增販賣BOSS怨念<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/11 更新內容 ★★</span><br>
+	  <span class="data-block">修正BOSS挑戰館，死亡或離開挑戰房後，不再會被傳到主城<BR>
+	  血盟成員登出後，會記錄時間於血盟備註<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/10 更新內容 ★★</span><br>
+	  <span class="data-block">無限大戰BOSS調整，一至十波皆有低中高階BOSS，各分布於邊角<BR>
+	  調整大逃殺活動傳送位置會有小偏移，以避免擋路<BR>
+	  修正怪物搜尋目標會卡住問題<BR>
+	  調整爆氣補充水製作材料與效果<BR>
+	  調整台灣啤酒的製作材料<BR>
+	  調整道祖稱號的顏色<BR>
+	  修正修仙系統少顯示魔攻數據<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/08 更新內容 ★★</span><br>
+	  <span class="data-block">修正龍皇-安塔瑞斯魔防設置錯誤( 9->20 )<BR>
+	  減少墓穴地圖累積冤魂數的廣播<BR>
+	  修正屍魂塔通關後的傳送，最後倒數10秒未顯示問題<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/05 更新內容 ★★</span><br>
+	  <span class="data-block">官網特色介紹，新增修仙系統能力表<BR>
+	  遊戲內展示區，新增紋樣道具於功能性NPC展示<BR>
+	  魂珠商人更改至主城內<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/03 更新內容 ★★</span><br>
+	  <span class="data-block">新地圖墓穴墳場登場，可獲取紋樣技能相關道具，可至展示區功能性npc查看<BR>
+	  紋樣相關製作放置於功能性製作NPC。紋樣各技能強化上限為20次<BR>
+	  到達上限需透過降魂丹清除次數，才可再次強化，紋樣技能開啟於消耗品商人購買。<BR>
+	  墓穴墳場每日限制擊殺1000隻怪物，到達後會被傳送出去且不可再進入，每日重啟後重置。<BR>
+	  墓穴擊殺怪物會產生冤魂，到達數量會出現BOSS墓穴魔蛛(比無線大戰墓穴魔蛛弱且掉落物不同)<BR>
+	  當地圖上有一隻墓穴魔蛛存活，將不累積冤魂數(冤魂煉化甕仍可轉化為魂珠)。<BR>
+	  無線大戰BOSS墓穴魔蛛降低強度。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/04/02 更新內容 ★★</span><br>
+	  <span class="data-block">無限大戰BOSS墓穴魔蛛重新定位傷害模式。<BR>
+	  戰神武器調整安定值為0。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/30 更新內容 ★★</span><br>
+	  <span class="data-block">無限大戰BOSS墓穴魔蛛強度調降。<BR>
+	  屍魂塔上周排名獎勵，在屍魂塔排行榜對話窗上方可點選領取。<BR>
+	  庫庫爾坎寶箱修正為可堆疊<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/29 更新內容 ★★</span><br>
+	  <span class="data-block">無限大戰最後一波更換為新BOSS墓穴魔蛛且獎勵豐富。<BR>
+	  元寶-一般商店，新增單屬性裝備傳送門的傳送卷軸(限時)。<BR>
+	  兌換底比斯的龜裂之核NPC，改為可批量製作<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/28 更新內容 ★★</span><br>
+	  <span class="data-block">傳送師移除大逃殺傳送功能，改由專屬報名NPC於活動時間前5分鐘，出現在主城稻草人下方。<BR>
+	  修正怪物的範圍魔法也會傷害到自己的錯誤。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/26 更新內容 ★★</span><br>
+	  <span class="data-block">屍魂塔排名獎勵開放，每周日維修後結算，各職業完成通關且排名前三名者，皆可領取獎勵<BR>
+	  第一名:金幣2億、第二名:金幣1億、第三名:金幣5千萬，領取期限為下次結算日前，每周結算後會清除紀錄。<BR>
+	  新增大逃殺活動專屬NPC，活動進入時間NPC會出現在主城木頭人下方，原傳送師仍可傳送，視情況決定未來是否關閉傳送。<BR>
+	  新增克隆實驗所-技能卡2區。<BR>
+	  修正who頁面關閉特效無作用問題。<BR>
+	  修正噬血附魔無作用問題。<BR>
+	  修正部分金色娃娃觸發魔法會造成當機，重新調整技能配置。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/25 更新內容 ★★</span><br>
+	  <span class="data-block">新增十字軍與德古拉密道怪物擊殺獲得威望值。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/19 更新內容 ★★</span><br>
+	  <span class="data-block">修正屍魂塔個人最佳成績記錄錯誤問題。<BR>
+	  暗影神殿3F與武防擴孔區的怪物數量提高30%。<BR>
+	  克隆實驗所的怪物數量提高50%、復活時間縮短30%。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/17 更新內容 ★★</span><br>
+	  <span class="data-block">元寶商人新增屍魂塔起點卷軸，可以瞬間回到入口，只能在屍魂塔內使用。<BR>
+	  修正大逃生BOSS生存模式，第二支BOSS未觸發問題，當觸發第二支BOSS出現，額外生存人數積分上限提高至30分，未觸發則無額外積分。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/15 更新內容 ★★</span><br>
+	  <span class="data-block">封印屍魂水晶調整消失時間為20H。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/14 更新內容 ★★</span><br>
+	  <span class="data-block">每日任務怪物狩獵數量整體減少30%。<BR>
+	  魔法防禦上限為500，超過不會降低魔法傷害。<BR>
+	  修正封印的屍魂水晶消失時間為24H。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2026/03/13 更新內容 ★★</span><br>
+	  <span class="data-block">屍魂塔開放，於主城右方可進入屍魂塔空間，NPC對話獲取屍魂藍色水晶，支付金額後可進入挑戰，挑戰時間30分鐘<BR>
+	  怪物會掉落屍魂幣，只能在副本內購物，離開屍魂副本屍魂幣會回收，購買的商品不會回收屍魂灰色水晶24H會自動消失，消失後才可以再次領取藍色水晶進入挑戰<BR>
+	  屍魂塔有排行榜，未來新增排名結算領取獎勵，副本房間只有10間，若都有人在挑戰需等候。<BR>
+	  調整大逃殺活動內容，分隊廝殺模式，可協助隊友施放BUFF，範圍魔法不會傷害到對友，但可傷害到敵對<BR>
+	  BOSS生存模式調整結算獎勵，有一人存活到最後，參與的倖存者皆獲取大獎+30分，且每存活一人額外+1分，額外上限+20分<BR>
+	  吉爾塔斯調整強度，並新增爆氣祕法殘頁(上)、(下)，可升級爆氣密法。<BR>
+	  新增武器防具附魔石，詳細介紹可至道具介紹頁面查看。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/03/11 更新內容 ★★</span><br>
+	  <span class="data-block">修正克隆實驗所-項鍊與耳環地圖互換問題。<BR>
+	  克隆實驗所地圖若不離開，可在裡面待到重啟才會傳回主城<BR>
+	  修正WHO頁面-個人控制開關裡，出現特效開關的切換選項。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/03/10 更新內容 ★★</span><br>
+	  <span class="data-block">新增主城禁止施放冰雪暴，以免造成LAG。<BR>
+	  小瑪莉新增商品：天賦屬性點D、E、F，克隆實驗所鑰匙：底比斯、項鍊、耳環、技能卡地圖怪物，鑰匙6小時後消失，期間可自由進出，每日限購一個-貪婪的神符(1H)。<BR>
+	  新增WHO頁面-個人控制開關裡，特效開關、廣播開關。<BR>
+	  單屬性裝備製作材料取消發光的晶塵，降低製作單屬性裝備的成本。<BR>
+	  官網新增遊戲內容Q&A，不定期整理玩家的問答，也可在這詢問及回覆。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/03/09 更新內容 ★★</span><br>
+	  <span class="data-block">更換無限大戰最後一波為高階BOSS。<BR>
+	  部分地圖已人滿為患，近期將加開地圖分散人群。<BR>
+	  預告更新，屍魂塔副本即將推出。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/03/08 更新內容 ★★</span><br>
+	  <span class="data-block">新年活動地圖已結束，未來仍會持續舉辦活動，感謝玩家支持。<BR>
+	  無限大戰的獎勵蛋糕怪，因獵取方式容易偏向某些職業，故在這部分將移除，改為好棒棒加開一圖。<BR>
+	  無限大戰為吸引新手也前來參與活動，調整掉落物品分配為平均分配，戰利品數量足夠會以平分方式，其餘戰利品數量不足則以順序分配，仇恨大者優先獲取。<BR>
+	  鑒於新手BOSS資源短缺，難以與老手搶王，懷舊幣新增初階怨念袋，可前往怨念場召換BOSS。<BR>
+	  地圖名稱因更新疏漏變為亂碼，於重啟後修正。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/03/05 更新內容 ★★</span><br>
+	  <span class="data-block">調整大逃殺-BOSS生存模式，第六分鐘起若生存人數在參加人數一半以上，會追加第二隻BOSS，同時生存積分加倍累積。<BR>
+	  因永久藥水與普通藥水名稱相似，導致輔助喝水讀取錯誤問題，故修改永久藥水名稱，請玩家記得更換輔助名稱的設定。<BR>
+	  再次修正BOSS空身問題。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/03/03 更新內容 ★★</span><br>
+	  <span class="data-block">因玩家人數上升，已召喚寵物暫時限制進入主城，在主城內召喚則不限制<BR>
+	  金色娃娃:龍皇賦予的靈魂昇華，改為狀態消失後會再次施放<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/03/02 更新內容 ★★</span><br>
+	  <span class="data-block">調整掉落物設計，不再有空身王，寵物與召喚物會影響分寶，導致道具被刪除，改為發生此狀況會掉落在地上<BR>
+	  怪物衝暈機制修正，怪物被衝暈結束後，會有3秒抗性，期間無法再次被衝暈<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/28 更新內容 ★★</span><br>
+	  <span class="data-block">修正每日任務異常的問題<BR>
+	  WHO頁面新增介面重設<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/27 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺改為隨機模式，(一)分隊廝殺、(二)終極BOSS生存<BR>
+	  召喚場新增白騎士、德古拉，高階隨機袋抽取為殘魂，指定購買為本體，強度不同掉寶也不同<BR>
+	  目前每日任務放棄非當前任務有機率遇到打怪問題，重登後對話窗會顯示當前任務，此問題近期會修正<BR>
+	  攻城盤踞BOSS調整為本體的白騎士、德古拉各一隻<BR>
+	  新年活動進入最後一周，屆時將會做調整與更新，感謝玩家支持。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/23 更新內容 ★★</span><br>
+	  <span class="data-block">修正低階技能卡箱未放置屬性防禦問題<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/22 更新內容 ★★</span><br>
+	  <span class="data-block">修正技能卡(木乃伊的詛咒)對boss不再有效<BR>
+	  每日任務若放棄不是當前的任務,有機率出現異常,若要查看當前任務,可以重登後對話窗會顯示<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/21 更新內容 ★★</span><br>
+	  <span class="data-block">修正紅包袋無法放入快捷欄位<BR>
+	  調整攻城期間入侵的BOSS群<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/20 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺分隊廝殺模式，看得到隊友血條，可以直覺區分隊友，若有組隊會受到影響，也可由ID後方判斷隊伍<BR>
+	  大逃殺每分鐘會隨機傳送，當下人數多的隊伍會降下隨機詛咒<BR>
+	  修正妖森、木頭人等NPC消失問題<BR>
+	  修正寵物項圈已召喚中不可再次召喚，避免寵物裝備消失問題<BR>
+	  在主城會延遲的，可進入系統設定，關閉NPC名稱顯示可改善<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/19 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺模式更換，調整為分隊廝殺模式<BR>
+	  準備期仍可在生存秘境狩獵打寶，將於開始前一分鐘廣播準備進入戰鬥會場<BR>
+	  進場後隨機分隊，10分鐘內廝殺至敵對全滅才算獲勝，進場分隊後可看見隊友血量，玩家ID後方會顯示隊伍<BR>
+	  積分計算為獲勝方全體積分+30，戰敗方參與積分+3<BR>
+	  獲勝方敵對每擊殺1人，全體積分+1，戰敗方每擊殺1人，全體積分+2<BR>
+	  擊殺積分上限+30，同IP擊殺不列入計算，擊殺隊友不列入計算。<BR>
+	  若無獲勝方，所有人發參與積分+5<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/17 更新內容 ★★</span><br>
+	  <span class="data-block">重新調整內掛召喚方式，每分鐘偵測當沒有召喚物時執行召喚<BR>
+	  新增元寶販賣復活卷軸(內掛用)，當內掛設定寵物治療開啟，則可自動復活寵物<br>
+	  WHO頁面新增領回寵物盔甲功能，當玩家滿背包寵物裝備無法回歸時，會儲存在這。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/15 更新內容 ★★</span><br>
+	  <span class="data-block">修正傷害型技能卡插在防具不會觸發問題<BR>
+	  修正大逃殺生存BOSS異常問題<br>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/14 更新內容 ★★</span><br>
+	  <span class="data-block">新春福袋內容物：紅包、洗煉卷、低中高階卡箱、5%武防捲、6階飾品盒、7階飾品盒、光圈符文礦石<BR>
+	  新增光圈符文圖案於防具介紹內展示<br>
+	  修正紅包1萬元無法開啟問題。<BR>
+	  無限大戰地圖開放使用掛機，方便玩家爭搶獎勵蛋糕怪。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/12 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺活動-BOSS追擊生存戰，調整秘境寶藏王每擊殺100隻守護者後出現<br>
+	  展示區新增倖存者徽章與賭神的榮耀<br>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/08 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺活動更換模式：BOSS追擊生存戰，<br>
+	  第一關仍是生存秘境，新增生存秘境擊殺150隻守護者後，會隨機地點召喚秘境屠夫(寶藏王)<BR>
+	  第二關BOSS生存，召喚強力BOSS追擊玩家，入場即得3積分，每存活1分鐘獲得2積分<br>
+	  當出現唯一倖存者並持續存活1分鐘，可獲得額外大獎30積分。<br>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/02/02 更新內容 ★★</span><br>
+	  <span class="data-block">大逃殺活動的生存秘境怪物數量增加，撕殺時間調整為10分鐘，陷阱數量微幅增加<BR>
+	  屠宰者天賦附加傷害調整為怪物當前血量隨機1%~3%<br>
+	  修正三重矢天賦純普攻也會觸發問題，附加傷害調整為怪物當前血量隨機1%~3%<br>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/30 更新內容 ★★</span><br>
+	  <span class="data-block">今日大逃殺活動試辦，會參考活動情況做修正與調整<BR>
+	  暗影神殿3F怪物數量小幅提升<br>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/29 更新內容 ★★</span><br>
+	  <span class="data-block">即將推出大逃殺活動，體驗天堂打架的樂趣，並且獲取積分<BR>
+	  大逃殺獲取的積分，可用來購買物品。<br>
+	  血盟升級需求調整，狩獵怪物將獲取血盟能量，用以提升血盟等級<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/26 更新內容 ★★</span><br>
+	  <span class="data-block">在限時的單屬性裝備材料區，新增對應的BOSS，殘魂白騎士、殘魂德古拉<BR>
+	  移除八大長老族群特性，小怪遭受攻擊八大長老不再幫忙<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/25 更新內容 ★★</span><br>
+	  <span class="data-block">每日無限大賽最終BOSS調整，單數日弗拉德．德古拉，雙數日白騎士．匈雅提<BR>
+	  由於高階BOSS傷害增強，調整飾品區BOSS不再主動，讓玩家可以輕鬆內掛<BR>
+	  新增BOSS徽章附魔、中階徽章合成，可至BOSS徽章展示區、中階徽章展示區查看<BR>
+	  功能性展示區新增爆氣祕法資料可查看<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/24 更新內容 ★★</span><br>
+	  <span class="data-block">新增爆氣祕法、爆氣補充水，可至製作區功能性道具查看<BR>
+	  修正拍賣場顯示錯位問題<BR>
+	  修正寵物召喚笛無數量限制問題<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/22 更新內容 ★★</span><br>
+	  <span class="data-block">促進玩家間交易，元寶拍賣場將不收手續費，請大家多多利用<BR>
+	  修正寵物貓與高等貓的寒冷戰慄不會吸血的問題<BR>
+	  修正藍變斗篷男騎拿弓無法移動問題<BR>
+	  修正BOSS辛克萊會導致閃退問題<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/21 更新內容 ★★</span><br>
+	  <span class="data-block">新增另一項推廣獎勵FB社團分享，詳細請至推廣相關查看<BR>
+	  新增飾品加工NPC，可將最低階5個相同屬性的飾品，製作該類型的冰晶保護石<BR>
+	  再由NPC升階飾品，強化失敗飾品不會消失，但會退回到最低階<BR>
+	  修正妖精魅力61->60即可以召喚特殊強力精靈<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/19 更新內容 ★★</span><br>
+	  <span class="data-block">掛機新增寵物補血量設定<BR>
+	  掛機新增妖精也可自動召喚強力精靈(召喚開啟即可)<BR>
+	  掛機召喚說明-會有30分鐘CD時間才會再次召喚(登出後重計)，時間內召喚物死亡不會自動召喚<BR>
+	  掛機前請解除召喚，讓掛機自動召喚才不會有時序對不上的問題。<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/17 更新內容 ★★</span><br>
+	  <span class="h2-block">新增贊助方案 1.新手基礎禮包100元 2.新手高階禮包1000元，</span><BR>
+	  <span class="h2-green">新手基礎禮包：</span><BR>
+	  <span class="data-block">+7新手商店武器製作圖紙(自選)、經驗娃娃LV4、VIP4、海音戰場徽章(第四階段)、傲慢的祝福水晶LV4、<BR>
+	  白娃娃30箱、白變身卡30箱、300%經驗藥水10瓶、天幣500萬、1000元寶</span><BR>
+	  <span class="h2-green">新手高階禮包：</span><BR>
+	  <span class="data-block">+8新手商店武器製作圖紙(自選)、經驗娃娃LV10、VIP9、精墓戰場徽章(滿階)、傲慢的祝福水晶LV9、名譽貨幣(永久)<BR>
+	  巧克力蛋糕(永久)、白娃娃300箱、白變身卡300箱、300%經驗藥水100瓶、天幣1億、1萬元寶<BR>
+	  <BR>飾品套裝效果補上說明，請至飾品介紹查看<BR>
+	  無限大戰增加每關BOSS數量，最後一關更換新BOSS白騎士·匈雅提<br>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/14 更新內容 ★★</span><br>
+	  <span class="data-block">啟用伺服器分流2，解決因異常連線造成短時間無法登入的問題，兩個入口都是相同的伺服器<BR>
+	  修正寵物或召喚獸擊殺低階BOSS無法出現傳送陣問題<BR>
+	  降低軍隊徽章的重量<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/13 更新內容 ★★</span><br>
+	  <span class="data-block">新增低階BOSS擊殺後，出現四種傳送陣維持2分鐘，可前往新地圖蒐集屬性裝備材料<BR>
+	  新增屬性裝備製作，可至展示區觀看素質<BR>
+	  新增完美拆卡魔法石，100%取回技能卡<BR>
+	  修正玩家衝暈狀態無法造成物理傷害<BR>
+	  </span>
+	  <br><span class="h2-blue">★★ 2026/01/09 更新內容 ★★</span><br>
+	  <span class="data-block">調高賞金地宮金幣數量，新增元寶販售與代幣相同的地宮鑰匙<br>
+	  開放寵物裝備製作，可至展示區觀看數據<br>
+	  新增紫娃娃與紫變身卡重抽機制，請至各NPC處查看
+	  </span><BR>
+	  <br><span class="h2-blue">★★ 2026/01/11 更新內容 ★★</span><br>
+	  <span class="data-block">調高寵物裝備的能力<br>
+	  無限大戰最後一波BOSS更換為中階BOSS:賽尼斯</span><BR>
+	  <br><span class="h2-blue">★★ 2026/01/09 更新內容 ★★</span><br>
+	  <span class="data-block">調高賞金地宮金幣數量，新增元寶販售與代幣相同的地宮鑰匙<br>
+	  開放寵物裝備製作，可至展示區觀看數據<br>
+	  新增紫娃娃與紫變身卡重抽機制，請至各NPC處查看
+	  </span><BR>
+	  <br><span class="h2-blue">★★ 2026/01/06 更新內容 ★★</span><br>
+	  <span class="data-block">修正騎士衝暈錯誤的問題。<BR>
+	  火窟與黃昏山脈開放記憶座標<br>
+	  修正武器傷害過低會有不揮刀的問題</span><BR>
+	  <br><span class="h2-blue">★★ 2026/01/05 更新內容 ★★</span><br>
+	  <span class="data-block">修正騎士衝暈機率未套用計算問題。<BR>
+	  騎士神聖壁壘天賦微調，每提升一點+3%機率格檔50%所有傷害。<br>
+	  修正瑪依奴BOSS無法使用穿雲箭問題。<BR>
+	  新增展示NPC功能性道具，若玩家有想放入展示區的物品，可告知管理者新增。</span><BR>
+	  <br><span class="h2-blue">★★ 2026/01/04 更新內容 ★★</span><br>
+	  <span class="data-block">聖誕活動已結束，聖誕老人將於三天後消失。<BR>
+	  修正BOSS重生表未顯示所有BOSS問題。<br>
+	  微調毀滅巨劍吸血機制，100%吸血，吸血量為50%的武器傷害值，同時扣除對方血量<BR>
+	  微調武器-奇古獸，普攻有5%機率無視對方魔防。</span><BR>
+	  <br><span class="h2-blue">★★ 2026/01/01 更新內容 ★★</span><br>
+	  <span class="data-block">今日更新，中階BOSS變動，調整攻擊模式與掉落率提高<BR>
+	  新增中階勳章道具，可至展示區觀看<BR>
+	  傳送師卷軸新增龍之谷5F、象牙塔6F，方便解任務傳送</span><BR>
+	  <br><span class="h2-blue">★★ 2025/12/31 更新內容 ★★</span><br>
+	  <span class="data-block">新增賞金地宮，純金幣地圖，由代幣商人購買鑰匙進入</span><BR>
+	  <br><span class="h2-blue">★★ 2025/12/29 更新內容 ★★</span><br>
+	  <span class="data-block">贊助方案新增<50元>每周寶箱、<100元>每月寶箱<BR>
+	  詳細資訊請至贊助相關查看</span><BR>
+	  <br><span class="h2-blue">★★ 2025/12/28 更新內容 ★★</span><br>
+	  <span class="data-block">為凸顯本服技能卡特色，重新調整技能卡掉落率與升階需求。<BR>
+	  因玩家強度提升，調整無限大戰每波改為BOSS<BR>
+	  修正白色變身卡女妖無法裝備弓箭問題</span><BR>
+	  <br><span class="h2-blue">★★ 2025/12/26 更新內容 ★★</span><br>
+	  <span class="data-block">煉金術士增加製作魔法卷軸中級治癒術。<BR>
+	  聖誕活動地圖更改為可以內掛<BR>
+	  新增巨大聖誕麋鹿出現在說話之島<BR>
+	  新增經驗區(0轉)，限制0轉才能進入，後進玩家可加速升級至1轉。
+	  </span><BR>
+	  <br><span class="h2-blue">★★ 2025/12/25 更新內容 ★★</span><br>
+	  <span class="data-block">煉金術士增加製作魔法卷軸聖潔之光與高級治癒術。<BR>
+	  </span><BR>
+	  <span class="h2-blue">★★ 2025/12/24 更新內容 ★★</span><br>
+	  <span class="data-block">修正幻術師變身卡異常問題。
+	  </span><BR>
+	  <br><span class="h2-blue">★★ 2025/12/15 更新內容 ★★</span><br>
+	  <span class="h2-red">開放推廣獎勵<br>
+      <span class="data-block">於推廣相關頁面查看推廣獎勵與方式。</span><BR>
+	  <br><span class="h2-blue">★★ 2025/12/13 更新內容 ★★</span><br>
+	  <span class="h2-red">寵物強化<br>
+      <span class="data-block">寵物攜帶數量為(角色魅力+隱藏魅力)/6，攜帶寵物數量最多5隻<BR>寵物等級上限70等且能力提升，進化後寵物強度翻倍。</span><BR>
+	  <br><span class="h2-blue">★★ 2025/12/12 更新內容 ★★</span><br>
+	  <br><span class="h2-red">開服衝等活動<br>
+      <span class="data-block">系統自動發放，各職業前5名首次到達90等獎勵500元寶，全職業前10名首次到達99等獎勵1000元寶(已額滿)</span><BR>
+	  <br><span class="h2-green">部分錯誤修正<br>
+      <span class="data-block">古老皮盔甲修正為仿正服使用職業，部分古老裝備開放其他職業使用，可於展示區查看。<BR>
+	  魔法娃娃強化藥水，公主機率誤植，強化機率為50%<BR>
+	  傲慢強化水晶卷軸，補上文字說明<BR>
+	  </span></details><BR>
+	  `,
+    
+      // 1: 遊戲設定
+      `<span class="h2-red">伺服器有內掛系統可24H掛機，打寶練功不落後<BR>輸入帳號密碼首次登入會自動建立帳號<br>每日17:00重啟伺服器<br>所有道具皆可從遊戲中獲得<BR>
+      50等開始會有能力點，到99等共計49點<BR>
+      升級配點單屬性上限至25，萬能藥單屬性可提升上限至35點(萬能藥使用無上限)，回憶蠟燭可配置上限至35點<BR>
+      首次99等系統贈送回憶蠟燭(使用回憶蠟燭後會自動完美洗血洗魔，轉生後不可使用)，可在轉生前配置自己的喜好，體質、精神越高，升級給予的生命、魔力越高</span><BR>
+      <br><span class="h2-blue">轉生:十轉<br>轉生後保留當前15%生命與魔力<BR>經驗:2000倍<br>金幣:5倍<br>道具2倍<br>負重5倍<br>衝裝機率提高10%<br>IP上限3開<BR>每週五重啟後經驗提升100%，持續到週日17:00重啟後結束</span><BR>`,
+
+      // 2: 特色介紹
+      `<details style="cursor: pointer;" close>
+        <summary style="list-style: none; text-align: left; outline: none;"><span class="h2-red">
+          ▼ 修仙系統-點擊收合/展開</span>
+        </summary>
+        <span class="data-block">
+          <div style="overflow-x: auto; margin-top: 15px; border: 2px solid #666; max-height: 600px;">
+            <table style="width: 100%; border-collapse: collapse; color: #fff; background: rgba(0,0,0,0.85); font-size: 16px; text-align: left; white-space: nowrap;">
+              <thead style="position: sticky; top: 0; background: #222; z-index: 1;">
+                <tr style="background: #222; color: #ffffff;">
+                  <th style="padding: 10px 15px; border: 1px solid #555;">階級</th>
+                  <th style="padding: 10px 15px; border: 1px solid #555;">歷練範圍</th>
+                  <th style="padding: 10px 15px; border: 1px solid #555;">HP / MP</th>
+                  <th style="padding: 10px 15px; border: 1px solid #555;">近、遠傷害、魔攻/近、遠命中</th>
+                  <th style="padding: 10px 15px; border: 1px solid #555;">全能力</th>
+                  <th style="padding: 10px 15px; border: 1px solid #555;">魔防</th>
+                  <th style="padding: 10px 15px; border: 1px solid #555;">減傷(物/魔)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[凡人]</td><td style="padding:8px 15px; border:1px solid #444;">0 - 8千</td><td style="padding:8px 15px; border:1px solid #444;">50 / 50</td><td style="padding:8px 15px; border:1px solid #444;">1 / 0</td><td style="padding:8px 15px; border:1px solid #444;">1</td><td style="padding:8px 15px; border:1px solid #444;">1</td><td style="padding:8px 15px; border:1px solid #444;">1 / 1</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[武者]</td><td style="padding:8px 15px; border:1px solid #444;">8千 - 1.6萬</td><td style="padding:8px 15px; border:1px solid #444;">70 / 70</td><td style="padding:8px 15px; border:1px solid #444;">1 / 1</td><td style="padding:8px 15px; border:1px solid #444;">1</td><td style="padding:8px 15px; border:1px solid #444;">2</td><td style="padding:8px 15px; border:1px solid #444;">2 / 2</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[武師]</td><td style="padding:8px 15px; border:1px solid #444;">1.6萬 - 3.2萬</td><td style="padding:8px 15px; border:1px solid #444;">80 / 80</td><td style="padding:8px 15px; border:1px solid #444;">2 / 1</td><td style="padding:8px 15px; border:1px solid #444;">1</td><td style="padding:8px 15px; border:1px solid #444;">3</td><td style="padding:8px 15px; border:1px solid #444;">2 / 3</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[宗師]</td><td style="padding:8px 15px; border:1px solid #444;">3.2萬 - 6.4萬</td><td style="padding:8px 15px; border:1px solid #444;">100 / 100</td><td style="padding:8px 15px; border:1px solid #444;">2 / 2</td><td style="padding:8px 15px; border:1px solid #444;">2</td><td style="padding:8px 15px; border:1px solid #444;">4</td><td style="padding:8px 15px; border:1px solid #444;">3 / 4</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[煉氣]</td><td style="padding:8px 15px; border:1px solid #444;">6.4萬 - 12.8萬</td><td style="padding:8px 15px; border:1px solid #444;">150 / 125</td><td style="padding:8px 15px; border:1px solid #444;">3 / 2</td><td style="padding:8px 15px; border:1px solid #444;">2</td><td style="padding:8px 15px; border:1px solid #444;">5</td><td style="padding:8px 15px; border:1px solid #444;">3 / 5</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[築基]</td><td style="padding:8px 15px; border:1px solid #444;">12.8萬 - 25.6萬</td><td style="padding:8px 15px; border:1px solid #444;">180 / 150</td><td style="padding:8px 15px; border:1px solid #444;">3 / 3</td><td style="padding:8px 15px; border:1px solid #444;">2</td><td style="padding:8px 15px; border:1px solid #444;">6</td><td style="padding:8px 15px; border:1px solid #444;">4 / 6</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[結丹]</td><td style="padding:8px 15px; border:1px solid #444;">25.6萬 - 51.2萬</td><td style="padding:8px 15px; border:1px solid #444;">250 / 175</td><td style="padding:8px 15px; border:1px solid #444;">4 / 3</td><td style="padding:8px 15px; border:1px solid #444;">3</td><td style="padding:8px 15px; border:1px solid #444;">7</td><td style="padding:8px 15px; border:1px solid #444;">5 / 7</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[元嬰]</td><td style="padding:8px 15px; border:1px solid #444;">51.2萬 - 100萬</td><td style="padding:8px 15px; border:1px solid #444;">300 / 200</td><td style="padding:8px 15px; border:1px solid #444;">5 / 4</td><td style="padding:8px 15px; border:1px solid #444;">3</td><td style="padding:8px 15px; border:1px solid #444;">8</td><td style="padding:8px 15px; border:1px solid #444;">6 / 8</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[化神]</td><td style="padding:8px 15px; border:1px solid #444;">100萬 - 150萬</td><td style="padding:8px 15px; border:1px solid #444;">400 / 250</td><td style="padding:8px 15px; border:1px solid #444;">6 / 4</td><td style="padding:8px 15px; border:1px solid #444;">3</td><td style="padding:8px 15px; border:1px solid #444;">9</td><td style="padding:8px 15px; border:1px solid #444;">7 / 9</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[煉虛]</td><td style="padding:8px 15px; border:1px solid #444;">150萬 - 200萬</td><td style="padding:8px 15px; border:1px solid #444;">500 / 300</td><td style="padding:8px 15px; border:1px solid #444;">7 / 5</td><td style="padding:8px 15px; border:1px solid #444;">4</td><td style="padding:8px 15px; border:1px solid #444;">10</td><td style="padding:8px 15px; border:1px solid #444;">8 / 10</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[合體]</td><td style="padding:8px 15px; border:1px solid #444;">200萬 - 250萬</td><td style="padding:8px 15px; border:1px solid #444;">600 / 350</td><td style="padding:8px 15px; border:1px solid #444;">8 / 5</td><td style="padding:8px 15px; border:1px solid #444;">4</td><td style="padding:8px 15px; border:1px solid #444;">11</td><td style="padding:8px 15px; border:1px solid #444;">9 / 12</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[大乘]</td><td style="padding:8px 15px; border:1px solid #444;">250萬 - 300萬</td><td style="padding:8px 15px; border:1px solid #444;">700 / 400</td><td style="padding:8px 15px; border:1px solid #444;">9 / 6</td><td style="padding:8px 15px; border:1px solid #444;">5</td><td style="padding:8px 15px; border:1px solid #444;">12</td><td style="padding:8px 15px; border:1px solid #444;">10 / 14</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[渡劫]</td><td style="padding:8px 15px; border:1px solid #444;">300萬 - 400萬</td><td style="padding:8px 15px; border:1px solid #444;">800 / 450</td><td style="padding:8px 15px; border:1px solid #444;">10 / 6</td><td style="padding:8px 15px; border:1px solid #444;">5</td><td style="padding:8px 15px; border:1px solid #444;">13</td><td style="padding:8px 15px; border:1px solid #444;">11 / 16</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[真仙]</td><td style="padding:8px 15px; border:1px solid #444;">400萬 - 600萬</td><td style="padding:8px 15px; border:1px solid #444;">1000 / 550</td><td style="padding:8px 15px; border:1px solid #444;">11 / 7</td><td style="padding:8px 15px; border:1px solid #444;">6</td><td style="padding:8px 15px; border:1px solid #444;">14</td><td style="padding:8px 15px; border:1px solid #444;">12 / 18</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[金仙]</td><td style="padding:8px 15px; border:1px solid #444;">600萬 - 800萬</td><td style="padding:8px 15px; border:1px solid #444;">1200 / 650</td><td style="padding:8px 15px; border:1px solid #444;">12 / 7</td><td style="padding:8px 15px; border:1px solid #444;">7</td><td style="padding:8px 15px; border:1px solid #444;">15</td><td style="padding:8px 15px; border:1px solid #444;">14 / 20</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[太乙真仙]</td><td style="padding:8px 15px; border:1px solid #444;">800萬 - 1000萬</td><td style="padding:8px 15px; border:1px solid #444;">1400 / 750</td><td style="padding:8px 15px; border:1px solid #444;">13 / 8</td><td style="padding:8px 15px; border:1px solid #444;">8</td><td style="padding:8px 15px; border:1px solid #444;">16</td><td style="padding:8px 15px; border:1px solid #444;">16 / 22</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[太乙金仙]</td><td style="padding:8px 15px; border:1px solid #444;">1000萬 - 1200萬</td><td style="padding:8px 15px; border:1px solid #444;">1600 / 850</td><td style="padding:8px 15px; border:1px solid #444;">15 / 10</td><td style="padding:8px 15px; border:1px solid #444;">9</td><td style="padding:8px 15px; border:1px solid #444;">18</td><td style="padding:8px 15px; border:1px solid #444;">18 / 25</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[大羅真仙]</td><td style="padding:8px 15px; border:1px solid #444;">1200萬 - 1500萬</td><td style="padding:8px 15px; border:1px solid #444;">1800 / 950</td><td style="padding:8px 15px; border:1px solid #444;">17 / 12</td><td style="padding:8px 15px; border:1px solid #444;">10</td><td style="padding:8px 15px; border:1px solid #444;">20</td><td style="padding:8px 15px; border:1px solid #444;">20 / 28</td></tr>
+                <tr><td style="padding:8px 15px; border:1px solid #444;">[大羅金仙]</td><td style="padding:8px 15px; border:1px solid #444;">1500萬 - 2000萬</td><td style="padding:8px 15px; border:1px solid #444;">2100 / 1100</td><td style="padding:8px 15px; border:1px solid #444;">19 / 14</td><td style="padding:8px 15px; border:1px solid #444;">11</td><td style="padding:8px 15px; border:1px solid #444;">22</td><td style="padding:8px 15px; border:1px solid #444;">22 / 31</td></tr>
+                <tr style="background: rgba(255,215,0,0.15);">
+                  <td style="padding:8px 15px; border:1px solid #444;">[道祖]</td><td style="padding:8px 15px; border:1px solid #444;">2000萬以上</td><td style="padding:8px 15px; border:1px solid #444;">2500 / 1300</td><td style="padding:8px 15px; border:1px solid #444;">21 / 16</td><td style="padding:8px 15px; border:1px solid #444;">12</td><td style="padding:8px 15px; border:1px solid #444;">24</td><td style="padding:8px 15px; border:1px solid #444;">24 / 35</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </span>
+      </details>
+      <span class="data-block">擊殺怪物獲取歷練值，提升自身修仙階級，獲取額外能力提升<BR>
+      每次死亡減少1000點歷練值，達金仙階段後，每次死亡額外減少0.1%歷練值</span><BR>
+      <span class="h2-red">強化寵物<br>
+      <span class="data-block">提升血量與傷害，寵物等級最高70等，開放食用進化果實，進化後機體大提升</span><BR>
+      <span class="h2-red">物品查詢系統<br>
+      <span class="data-block">在/who頁面裡，可以查詢物品掉落資料</span><BR>
+      <span class="h2-red">戰鬥力探測器<br>
+      <span class="data-block">可使用戰鬥力探測器，看到玩家的數值與裝備，公開透明一覽無遺</span><BR>
+      <span class="h2-red">裝備品階</span><br>
+      <span class="data-block">獲取洗煉武防品階卷軸，可變更武防品階</span><BR>
+      <span class="h2-red">成就系統</span><br>
+      <span class="data-block">解鎖成就取得能力提升</span><BR>
+      <span class="h2-red">裝備插卡系統</span><br>
+      <span class="data-block">獲取能力卡或技能卡，插入裝備後賦予卡片效果</span><BR>
+      <span class="h2-red">轉生能力點</span><br>
+      <span class="data-block">轉生後可獲得3點，選擇提升能力值</span><BR>
+      <span class="h2-red">休息系統<br>
+      <span class="data-block">角色待在安全區域，可累積經驗祝福</span><BR>
+      <span class="h2-red">狩獵任務</span><br>
+      <span class="data-block">每日重置，完成任務獎勵：元寶*50、懷舊代幣*50、金幣15萬</span><BR>
+      <span class="h2-red">無限大戰</span><br>
+      <span class="data-block">每日晚間10點，從傳送師進入，參與打怪搶寶活動</span><BR>
+      <span class="h2-red">攻城活動</span><br>
+      <span class="data-block">開放奇岩城攻城戰，每週六20:00-21:00，攻城開始會有BOSS入侵，攻城結束城堡所屬血盟的在線人員，系統會自動發放獎勵</span><BR>
+      <span class="h2-red">小瑪莉機台</span><br>
+      <span class="data-block">兌換代幣遊玩，獲勝可得彩票兌換商品。</span><BR>
+      <span class="h2-red">拍賣場系統</span><br>
+      <span class="data-block">可將物品上架拍賣場，交易貨幣為元寶</span><BR>
+      <span class="h2-red">藏寶地宮</span><br>
+      <span class="data-block">每日21:40-22:00主城會出現空間法陣，可前往藏寶地宮殺怪奪寶。</span><BR>
+      <span class="h2-red">展示區</span><br>
+      <span class="data-block">新增的物品皆會有展示商人可查看素質。</span><BR>
+      <span class="h2-red">離線商店</span><br>
+      <span class="data-block">開立商店後離線，依然會持續掛賣，且不會占用IP上限數量。</span><BR>
+      <span class="h2-red">過安定武防加成</span><br>
+      <span class="data-block">每過1安定值，額外提升數值。</span><BR>
+      <span class="h2-red">道具技能卡</span><br>
+      <span class="data-block">多種技能，提高遊戲樂趣</span><BR>
+      <span class="h2-red">道館挑戰(天幣館/元寶館)</span><br>
+      <span class="data-block">可多人挑戰，每場10位BOSS，天幣館開場後需等三十分鐘才能下一場，元寶館無等待時間</span><BR>
+      <span class="h2-red">裝備祝福系統</span><br>
+      <span class="data-block">可將裝備祝福，額外提升能力。</span><BR>
+      <span class="h2-red">符石系統</span><br>
+      <span class="data-block">符石以龍之血液補充能量，裝備即可提升能力。</span><BR>`,
+
+      // 3: 職業介紹
+      `<span style="color:red; font-size:1.3rem; font-weight:bold;">◎王族簡介◎</span><br>
+      <span class="data-block">基礎生命上限：3500<BR>
+      <span style="color:#CC0088">※可創立血盟攻城宣戰，升級血盟可強化盟友能力</span><br>
+      <span style="color:#CC0088">※王族傷害提升30%</span><BR>
+      <BR><span style="color:red; font-size:1.2rem; font-weight:bold;">◎王族天賦◎</span><br>
+      <span style="color:#28a745; font-weight:bold;">【金剛護體】</span><br>
+      被攻擊時有機率[無敵]1秒，每加1點發動率增加1%。<br>
+      <span style="color:#28a745; font-weight:bold;">【暴君血脈】</span><br>
+      日光術作為(啟動/關閉)，開啟時有特效顯示。<br>
+      開啟後增加傷害，同時增加受到的傷害<br>
+      每加1點傷害附加7%，受到的傷害提高3.5%。<br>
+      持遠距武器附加傷害降低30%<BR>
+      <span style="color:#28a745; font-weight:bold;">【屬性專精】</span><br>
+      增加武器屬性卷軸發動率，每加1點發動率增加2%<br>
+      <span style="color:#28a745; font-weight:bold;">【榮耀治癒】</span><br>
+      每加1點道具與技能的補血量提高+4%,<br></span>
+      ------------------------------------------<BR>
+      <BR><span style="color:red; font-size:1.3rem; font-weight:bold;">◎騎士簡介◎</span><br>
+      <span class="data-block">基礎生命上限：3800<BR>
+      <span style="color:#CC0088">※反擊屏障機率35%、傷害武器值*6，遠攻也能觸發</span><br>
+      <span style="color:#CC0088">※騎士傷害提升10%</span><BR>
+      <br><span style="color:red; font-size:1.2rem; font-weight:bold;">◎騎士天賦◎</span><br>
+      <span style="color:#28a745; font-weight:bold;">【魔武專精】</span><br>
+      增加武器的魔法傷害，每加1點魔法武器傷害增加8%。<br>
+      <span style="color:#28a745; font-weight:bold;">【聖法之盾】</span><br>
+      日光束作為(啟動/關閉)<br>
+      以魔力吸收25%傷害，每1級魔力吸收0.2點傷害，滿級時魔力即使為0，仍可減免25%傷害，開啟時有特效顯示。<br>
+      <span style="color:#28a745; font-weight:bold;">【狂暴致命】</span><br>
+      普攻機率造成1.5倍傷害，自身血量越低倍率越高，50%血量達上限3倍，每加1點發動率+2%。<br>
+      計算公式=最大血量/當前血量×1.5倍<br>
+      <span style="color:#28a745; font-weight:bold;">【神聖壁壘】</span><br>
+      面對正前方三個面向的攻擊，每加1點所有傷害降低3%。<br></span>
+      ------------------------------------------<BR>
+      <BR><span style="color:red; font-size:1.3rem; font-weight:bold;">◎妖精簡介◎</span><br>
+      <span class="data-block">基礎生命上限：3000<BR>
+      <span style="color:#CC0088">※強化強力屬性精靈</span><br>
+      <br><span style="color:red; font-size:1.2rem; font-weight:bold;">◎妖精天賦◎</span><br>
+      <span style="color:#28a745; font-weight:bold;">【射擊之箭】</span><br>
+      三重矢機率附加目標當前生命3%的隨機傷害(上限3千)，最少造成技能點*10傷害，每加1點發動率增加1%。<br>
+      <span style="color:#28a745; font-weight:bold;">【神聖祝福】</span><br>
+      恢復類法術效果增加、魂體回魔增加，每加1點補血效果增加5%、回魔量+3滴。<br>
+      <span style="color:#28a745; font-weight:bold;">【精通能量】</span><br>
+      鋼鐵防護狀態下機率觸發絕對防護傷害降為0。<br>
+      烈焰之魂狀態下機率爆擊近戰普攻3倍傷害。<br>
+      生命的祝福施放機率給予3倍治癒量。<br>
+      暴風神射狀態下機率爆擊遠距普攻1.5倍傷害。<br>
+      每加1點發動率+1.5%。<br>
+      <span style="color:#28a745; font-weight:bold;">【傷害穿透】</span><br>
+      機率造成無視物理防禦(穿透聖界)，近戰每加1點發動率加2.5%，遠距每加1點發動率加2%。<br></span>
+      ------------------------------------------<BR>
+      <BR><span style="color:red; font-size:1.3rem; font-weight:bold;">◎法師簡介◎</span><br>
+      <span class="data-block">基礎生命上限：2900<BR>
+      <span style="color:#CC0088">※究光機率紫爆傷害加倍</span><br>
+      <br><span style="color:red; font-size:1.2rem; font-weight:bold;">◎法師天賦◎</span><br>
+      <span style="color:#28a745; font-weight:bold;">【致命一擊】</span><br>
+      施放傷害魔法有機率無視對方抗魔(對玩家穿透聖界)，每加1點發動率+2%。<br>
+      <span style="color:#28a745; font-weight:bold;">【意志集中】</span><br>
+      法術命中率提升，每加1點命中率+1%。<br>
+      <span style="color:#28a745; font-weight:bold;">【力量爆發】</span><br>
+      日光術作為(啟動/關閉)<br>
+      開啟後每秒增加耗魔與物理傷害，<br>
+      每加1點每秒扣魔10滴、傷害增加15%。<br>
+      <span style="color:#28a745; font-weight:bold;">【魔擊累積】</span><br>
+      兩秒內持續施放相同魔法增加傷害(最高疊加至4層)，每加1點每層傷害*1%。<br>
+      <span style="color:#28a745; font-weight:bold;">【召喚強化】</span><br>
+      黑豹平均強度每加1點整體提升約8%，10級進化武裝黑豹最多可召喚兩隻，同時解鎖終極召喚<br></span>
+      ------------------------------------------<BR>
+      <BR><span style="color:red; font-size:1.3rem; font-weight:bold;">◎黑妖簡介◎</span><br>
+      <span class="data-block">基礎生命上限：3200<BR>
+      <span style="color:#CC0088">※每轉生一次，雙刀爆擊率額外+1%</span><br>
+      <br><span style="color:red; font-size:1.2rem; font-weight:bold;">◎黑妖天賦◎</span><br>
+      <span style="color:#28a745; font-weight:bold;">【背刺襲擊】</span><br>
+      在目標敵人後三個面向攻擊，會造成加成傷害，每加1點增加15%傷害。<br>
+      <span style="color:#28a745; font-weight:bold;">【劇毒強化】</span><br>
+      強化附加劇毒，每加1點每秒中毒傷害增加25滴+自身力量。<br>
+      <span style="color:#28a745; font-weight:bold;">【神之跳躍】</span><br>
+      有機率閃避所有物理傷害，每加1點閃避機率增加1.5%。<br>
+      <span style="color:#28a745; font-weight:bold;">【刀劍之影】</span><br>
+      日光術作為(啟動/關閉)<br>
+      每下攻擊扣技能點魔力，並造成無視防禦(技能點*15%力量)傷害(穿透聖界)。<br></span>
+      ------------------------------------------<BR>
+      <BR><span style="color:red; font-size:1.3rem; font-weight:bold;">◎龍騎士簡介◎</span><br>
+      <span class="data-block">基礎生命上限：3500<BR>
+      <span style="color:#CC0088">※弱點曝光同時提高普攻傷害</span><br>
+      <span style="color:#CC0088">※屠宰者附加力量值*弱點[1.5倍、2倍、3倍]的隨機傷害(三刀都附加)</span><br>
+      <span style="color:#CC0088">※龍騎士傷害提升10%</span><BR>
+      <br><span style="color:red; font-size:1.2rem; font-weight:bold;">◎龍騎士天賦◎</span><br>
+      <span style="color:#28a745; font-weight:bold;">【屠宰擊殺】</span><br>
+      屠宰者附加目標當前生命3%的隨機傷害(上限4千)，最少造成技能點*10傷害，每加1點發動機率增加2%。<br>
+      <span style="color:#28a745; font-weight:bold;">【乾坤挪移】</span><br>
+      將目前傷害100%轉為自身吸血，每加1點發動機率增加2%。<br>
+      <span style="color:#28a745; font-weight:bold;">【強之護鎧】</span><br>
+      強化自身減傷，每加1點受到的所有傷害減免2%。<br>
+      <span style="color:#28a745; font-weight:bold;">【嗜殺血脈】</span><br>
+      每加1點普攻提高2%傷害，目標血量越低傷害越高，50%血量達上限技能點x4%傷害<br>
+      計算公式=最大血量/當前血量×技能點x2%<BR></span>
+      ------------------------------------------<BR>
+      <BR><span style="color:red; font-size:1.3rem; font-weight:bold;">◎幻術師簡介◎</span><br>
+      <span class="data-block">基礎生命上限：3100<BR>
+      <span style="color:#CC0088">※奇古獸普攻30%機率無視魔防(穿透聖界)</span><br>
+      <br><span style="color:red; font-size:1.2rem; font-weight:bold;">◎幻術師天賦◎</span><br>
+      <span style="color:#28a745; font-weight:bold;">【心靈爆破】</span><br>
+      增加心靈破壞的傷害，每加1點傷害與耗魔附加20%智力。<br>
+      <span style="color:#28a745; font-weight:bold;">【毀壞之身】</span><br>
+      增加骷髏毀壞命中率，每加1點機率增加2%。<br>
+      <span style="color:#28a745; font-weight:bold;">【痛苦化身】</span><br>
+      自身血量越少減免傷害越高，每加1點機率+5%。<br>
+      (減免算法:最大血量/目前血量*100，最多減免1000)<br>
+      <span style="color:#28a745; font-weight:bold;">【衝擊封印】</span><br>
+      攻擊有機率讓對方無法攻擊2秒，每加1點機率增加1.5%。</span>`,
+
+      // 4: 地圖介紹
+      `<br><span class="h2-red">BOSS召喚塔</span><br>
+      <span class="data-block">獲取BOSS怨念，可前往召喚BOSS，召喚的BOSS掉寶率提升50%</span><br>
+      <br><span class="h2-red">武防擴孔區</span><br>
+      <span class="data-block">獲取擴孔道具，可插入BOSS卡或技能卡</span><br>
+      <br><span class="h2-red">德古拉/十字軍密道(單屬性材料區)</span><br>
+      <span class="data-block">擊殺低階BOSS機率打開傳送門</span><br>
+      <br><span class="h2-red">寶藏地宮</span><br>
+      <span class="data-block">每日21:40-22:00主城出現傳送陣，限量一百隻藏寶怪前往獵殺</span><br>
+      <br><span class="h2-red">賞金地宮</span><br>
+      <span class="data-block">懷舊幣或元寶購買鑰匙，輕鬆殺怪獲取金幣，可隨時進出地圖，限時1小時</span><br>
+      <br><span class="h2-red">墓穴墳場</span><br>
+      <span class="data-block">由傳送師進入，限定擊殺1000隻後將會傳出無法再進入，可蒐集紋樣相關材料</span><br>
+      <br><span class="h2-red">屍魂塔單人副本(10間副本房，超過人數需等待)</span><br>
+      <span class="data-block">每周結算排名可領取獎賞，可賺取屍魂幣與地圖內商人購買物品</span><br>
+	  <br><span class="h2-red">學院戰場</span><br>
+      <span class="data-block">每日21:15投票決定活動模式，21:20-21:40由傳送師進入，賺取學院積分</span><br>
+      <br><span class="h2-red">大逃殺活動地圖</span><br>
+      <span class="data-block">每日21:00於傳送師或大逃殺報名NPC進場，賺取生存活動券，區分兩種模式：<BR>
+      1.分組廝殺模式：玩家隨機分隊廝殺<br>
+      2.BOSS生存模式：躲過BOSS的追殺，存活到最後</span><br>`,
+
+      // 5: 武器介紹
+      `<span class="h2-red">遺忘之島-古代的武器</span><br>
+      <span class="data-block">兌換NPC主城可見。</span><BR>
+      <br><span class="h2-red">暗黑武器</span><br>
+      <span class="data-block">兌換NPC主城可見。</span><BR>
+      <BR><span class="h2-red">底比斯武器</span><br>
+      <span class="data-block">兌換NPC主城可見。</span><BR>
+      <br><span class="h2-red">特殊武器</span><br>
+      <span class="data-block">攻擊附帶魔法的武器，兌換NPC主城可見。</span><BR>
+      <br><span class="h2-red">倖存者武器</span><br>
+      <span class="data-block">攻擊附帶強力魔法，於大逃殺活動獲取積分後與商人購買。</span><BR>
+      <br><span class="h2-red">戰神武器</span><br>
+      <span class="data-block">武器傷害大幅提升，攻擊附帶強力魔法，傷害來源主屬性，兌換NPC主城可見。</span><BR>`,
+
+      // 6: 防具介紹
+      `<span class="h2-red">遺忘之島-古代的防具</span><br>
+      <span class="data-block">兌換NPC主城可見。</span><BR>
+      <BR><span class="h2-red">各類王裝</span><br>
+      <span class="data-block">仿正服素質與掉落。</span><BR>
+      <br><span class="h2-red">龍麟盔甲</span><br>
+      <span class="data-block">兌換NPC主城可見。</span><BR>
+      <br><span class="h2-red">屬性內衣</span><br>
+      <span class="data-block">元寶或代幣可購買。</span><BR>
+      <br><span class="h2-red">臂甲</span><br>
+      <span class="data-block">元寶或代幣可購買。</span><BR>
+      <br><span class="h2-red">單屬性頭、手、鞋、斗</span><br>
+      <span class="data-block">狩獵低階BOSS可開啟傳送門，或透過元寶購買傳送捲，蒐集材料製作。</span><BR>
+      <br><span class="h2-red">雙屬性頭、手、鞋、斗</span><br>
+      <span class="data-block">+8單屬性裝備，並狩獵BOSS德古拉、白騎士獲取雙屬性製作秘笈即可製作。</span><BR>
+      <br><span class="h2-red">脛甲</span><br>
+      <span class="data-block">破軍脛甲：防禦-3，魔法命中+5，PVP傷害+5，每強化+1，PVP傷害+1<BR>
+      禦守脛甲：防禦-3，魔法命中+5，PVP物理減免+5，每強化+1，PVP物理減免+1<BR>
+      獵紋α、β、γ屬性，對應單、雙、三屬性附加，屬性分類如下<BR>
+      數值+60~300：血量、魔量。數值+2~10：魔法減免。數值+1~5：物理減免、藥水回復量、回血量、回魔量。<BR>
+      數值+1~+3：傷害(近、遠都有效)、命中(近、遠都有效)、力、敏、智、魔攻、防禦、抗魔。</span><BR>
+      
+      <br><span class="h2-red">光圈符文圖案介紹</span><br>
+      <span class="data-block">基礎光圈符文-透過小瑪莉NPC使用彩票兌換。</span><BR>
+      <div class="rune-table-container">
+        <table>
+          <tr>
+            <td><img src="Image/C1.jpg" alt="光圈符文(輪)" width="110"><br><span class="data-block">光圈符文(輪)</span></td>
+            <td><img src="Image/C2.jpg" alt="光圈符文(焰)" width="110"><br><span class="data-block">光圈符文(焰)</span></td>
+            <td><img src="Image/C3.jpg" alt="光圈符文(霜)" width="110"><br><span class="data-block">光圈符文(霜)</span></td>
+            <td><img src="Image/C4.jpg" alt="光圈符文(曜)" width="110"><br><span class="data-block">光圈符文(曜)</span></td>
+            <td><img src="Image/C5.jpg" alt="光圈符文(幻)" width="110"><br><span class="data-block">光圈符文(幻)</span></td>
+          </tr>
+        </table>
+      </div>
+      <BR>
+      <span class="data-block">附魔光圈符文</span><BR>
+      <div class="rune-table-container">
+        <table>
+          <tr>
+            <td><img src="Image/C6.jpg" alt="光圈符文(惡)" width="110"><br><span class="data-block">光圈符文(惡)</span></td>
+            <td><img src="Image/C7.jpg" alt="光圈符文(雨)" width="110"><br><span class="data-block">光圈符文(雨)</span></td>
+          </tr>
+        </table>
+      </div>`,
+
+      // 7: 飾品介紹
+      `<span class="h2-red">耳環+項鍊+戒指可組套裝效果<BR>耳環+腰帶+戒指可組套裝效果<BR>
+      需八階以上才可啟動套裝效果(三樣需同階)</span><br>
+      <details><summary><span class="h2-green">▼ 八階攻擊套裝效果-點擊展開</span></summary>
+        <span class="h2-blue">八階攻擊套裝(力量)</span><br>
+        <span class="data-block">力量+1、近傷+3、近命+3、防禦-1、減傷+1、魔法傷害+3、魔法減傷+6、血量+100、魔量+50、回血+2、回魔+5、抗魔+5、四屬防禦+5</span><BR>
+        <span class="h2-blue">八階攻擊套裝(敏捷)</span><br>
+        <span class="data-block">敏捷+1、遠傷+3、遠命+3、防禦-1、減傷+1、魔法傷害+3、魔法減傷+6、血量+75、魔量+75、回血+3、回魔+3、抗魔+5、四屬防禦+5</span><BR>
+        <span class="h2-blue">八階魔法套裝(魔法)</span><br>
+        <span class="data-block">智力+1、魔攻+5，近傷+1、近命+1、防禦-1、減傷+1、魔法傷害+3、魔法減傷+6、血量+50、魔量+100、回血+2、回魔+5、抗魔+5、四屬防禦+5</span><BR>
+      </details><BR>
+      <details><summary><span class="h2-green">▼ 八階防禦套裝效果-點擊展開</span></summary>
+        <span class="h2-blue">八階防禦套裝(力量)</span><br>
+        <span class="data-block">力量+1、防禦-1、減傷+5、魔法傷害+2、魔法減傷+20、血量+150、魔量+50、回血+5、回魔+2、抗魔+5、四屬防禦+5</span><BR>
+        <span class="h2-blue">八階防禦套裝(敏捷)</span><br>
+        <span class="data-block">敏捷+1、防禦-1、減傷+5、魔法傷害+2、魔法減傷+20、血量+100、魔量+100、回血+3、回魔+3、抗魔+5、四屬防禦+5</span><BR>
+        <span class="h2-blue">八階防禦套裝(智力)</span><br>
+        <span class="data-block">智力+1、防禦-1、減傷+5、魔法傷害+2、魔法減傷+20、血量+50、魔量+150、回血+2、回魔+5、抗魔+5、四屬防禦+5</span><BR>
+        <span class="h2-blue">八階防禦套裝(魅力)</span><br>
+        <span class="data-block">魅力+1、防禦-1、減傷+5、魔法傷害+2、魔法減傷+20、血量+100、魔量+100、回血+3、回魔+3、抗魔+5、四屬防禦+5</span><BR>
+      </details><BR>
+      <details><summary><span class="h2-green">▼ 九階攻擊套裝效果-點擊展開</span></summary>
+        <span class="h2-blue">九階攻擊套裝(力量)</span><br>
+        <span class="data-block">力量+3、近傷+5、近命+5、防禦-2、減傷+3、魔法傷害+6、魔法減傷+12、血量+200、魔量+100、回血+8、回魔+4、抗魔+10、四屬防禦+10</span><BR>
+        <span class="h2-blue">九階攻擊套裝(敏捷)</span><br>
+        <span class="data-block">敏捷+3、遠傷+5、遠命+5、防禦-2、減傷+3、魔法傷害+6、魔法減傷+12、血量+150、魔量+150、回血+6、回魔+6、抗魔+10、四屬防禦+10</span><BR>
+        <span class="h2-blue">九階魔法套裝(魔法)</span><br>
+        <span class="data-block">智力+3、魔攻+5，近傷+2、近命+2、防禦-2、減傷+3、魔法傷害+6、魔法減傷+12、血量+100、魔量+200、回血+4、回魔+8、抗魔+10、四屬防禦+10</span><BR>
+      </details><BR>
+      <details><summary><span class="h2-green">▼ 九階防禦套裝效果-點擊展開</span></summary>
+        <span class="h2-blue">九階防禦套裝(力量)</span><br>
+        <span class="data-block">力量+3、防禦-3、減傷+10、魔法傷害+4、魔法減傷+50、血量+300、魔量+100、回血+10、回魔+5、抗魔+10、四屬防禦+10</span><BR>
+        <span class="h2-blue">九階防禦套裝(敏捷)</span><br>
+        <span class="data-block">敏捷+3、防禦-3、減傷+10、魔法傷害+4、魔法減傷+50、血量+200、魔量+200、回血+7、回魔+7、抗魔+10、四屬防禦+10</span><BR>
+        <span class="h2-blue">九階防禦套裝(智力)</span><br>
+        <span class="data-block">智力+3、防禦-3、減傷+10、魔法傷害+4、魔法減傷+50、血量+100、魔量+300、回血+5、回魔+10、抗魔+10、四屬防禦+10</span><BR>
+        <span class="h2-blue">九階防禦套裝(魅力)</span><br>
+        <span class="data-block">魅力+3、防禦-3、減傷+10、魔法傷害+4、魔法減傷+50、血量+200、魔量+200、回血+7、回魔+7、抗魔+10、四屬防禦+10</span><BR>
+      </details><BR>
+      <br><span class="h2-red">永恆耳環</span><span class="h2-green">(掉落地點：暗影神殿3F)</span><br>
+      <span class="data-block">黑光永恆耳環(攻擊)<BR>紫光永恆耳環(魔法)<BR>藍光永恆耳環(防禦)<BR>紅光永恆耳環(防禦)</span><BR>
+      <BR><span class="h2-red">永恆項鍊</span><span class="h2-green">(掉落地點：魔族神殿)</span><br>
+      <span class="data-block">力量永恆項鍊(攻擊)<BR>敏捷永恆項鍊(攻擊)<BR>智力永恆項鍊(魔法)</span><BR>
+      <BR><span class="h2-red">永恆戒指</span><span class="h2-green">(掉落地點：八大長老室)</span><br>
+      <span class="data-block">攻擊永恆戒指(攻擊)<BR>魔法永恆戒指(魔法)<BR>防禦永恆戒指(防禦)</span><BR>
+      <BR><span class="h2-red">光之殷海薩腰帶</span><span class="h2-green">(掉落地點：古代巨人之墓)</span><br>
+      <span class="data-block">光之殷海薩力量腰帶(防禦)<BR>光之殷海薩敏捷腰帶(防禦)<BR>光之殷海薩智力腰帶(防禦)<BR>光之殷海薩魅力腰帶(防禦)</span><BR>`,
+
+      // 8: 道具介紹
+      `<span class="h2-red">永久藥水</span><br>
+      <span class="data-block">可狩獵獲取藥水提煉劑紅->橙->白->啤酒，提高喝水恢復量，升級消耗金幣量會增加，商店有永久紅水可購買</span><br>
+      <br><span class="h2-red">永久加速類道具</span><br>
+      <span class="data-block">名譽貨幣、巧克力蛋糕狩獵購買皆可獲得，可製作三段加速藥水，</span><br>
+      <br><span class="h2-red">地區徽章</span><br>
+      <span class="data-block">在各區域狩獵可獲取證明，可與NPC製作或升級</span><br>
+      <br><span class="h2-red">BOSS徽章</span><br>
+      <span class="data-block">狩獵BOSS取得BOSS證明，可與NPC製作與升級，與高階BOSS材料可再升級</span><br>
+      <br><span class="h2-red">傲慢的祝福水晶</span><br>
+      <span class="data-block">前往傲慢之塔狩獵怪物，獲取水晶與強化卷軸</span><br>
+      <br><span class="h2-red">聖誕鈴鐺</span><br>
+      <span class="data-block">聖誕節活動裝備道具，現於元寶商人處可購買</span><br>
+      <br><span class="h2-red">中階BOSS證明</span><br>
+      <span class="data-block">中階BOSS狩獵獲取製作，可再與高階BOSS材料升級</span><br>
+      <br><span class="h2-red">倖存者徽章</span><br>
+      <span class="data-block">大逃殺活動獲取積分，用積分與商人購買</span><br>
+      <br><span class="h2-red">萬能藥製作</span><br>
+      <span class="data-block">夢幻之島蒐集純白萬能藥可以製作</span><br>
+      <br><span class="h2-red">紋樣系統</span><br>
+      <span class="data-block">紋樣系統道具可在消耗品商人處購買，可於功能性製作NPC製作相關丹藥</span><br>
+      <br><span class="h2-red">商店交易貨幣</span><br>
+      <span class="data-block">開設商店專用交易貨幣1:1000金幣，可以更好的交易高單價商品</span><br>
+      <br><span class="h2-red">武器附魔石(LV1-LV10)</span><br>
+      <span class="h2-blue">※噬血※(近戰武器恢復生命為2倍，法杖除外，遠距武器機率減半)</span><br>
+      <span class="data-block">(50+Lv*5)%機率攻擊隨機恢復1~(20+Lv*3)點生命值，附魔成功率為10%，失敗保持原樣<br></span>
+      <span class="h2-blue">※噬靈※</span><br>
+      <span class="data-block">(15+Lv)%機率攻擊奪取(LV*3)點魔力值，附魔成功率為10%，失敗保持原樣<br>
+      <br><span class="h2-red">裝備附魔石(LV1-LV5)</span><br>
+      <span class="h2-blue">※盔甲減傷附魔卷軸※</span><br>
+      <span class="data-block">受到物理傷害(Lv*5)%機率降低(LV*5)%物理傷害，附魔成功率為10%，失敗保持原樣<br></span>
+      <span class="h2-blue">※靴子閃避附魔卷軸※</span><br>
+      <span class="data-block">受到物理傷害(Lv*2)%機率迴避傷害，附魔成功率為10%，失敗保持原樣<br></span>
+      <span class="h2-blue">※斗篷魔減附魔卷軸※</span><br>
+      <span class="data-block">受到魔法傷害(Lv*5)%機率降低(LV*5)%魔法傷害，附魔成功率為10%，失敗保持原樣<br></span>
+
+      <br><span class="h2-red">四屬性武器卷軸</span><br>
+      <span class="h2-blue">※火屬性※</span><br>
+      <span class="data-block">
+        Lv1.火之：攻擊6%機率造成1.2倍傷害<br>
+        Lv2.烈焰：攻擊7%機率造成1.4倍傷害<br>
+        Lv3.火靈：攻擊8%機率造成1.6倍傷害<br>
+        Lv4.赤炎：攻擊9%機率造成1.8倍傷害<br>
+        Lv5.火魂：攻擊10%機率造成2.0倍傷害</span><br>
+      <span class="h2-blue">※地屬性※</span><br>
+      <span class="data-block">Lv1.地之：攻擊5%機率造成定身效果0.3秒<br>
+        Lv2.崩裂：攻擊5%機率造成定身效果0.6秒<br>
+        Lv3.地靈：攻擊5%機率造成定身效果0.9秒<br>
+        Lv4.地裂：攻擊5%機率造成定身效果1.2秒<br>
+        Lv5.地魂：攻擊5%機率造成定身效果1.5秒</span><br>
+      <span class="h2-blue">※風屬性※</span><br>
+      <span class="data-block">Lv1.風之：攻擊30%機率造成2x2範圍的40點傷害<br>
+        Lv2.暴風：攻擊35%機率造成2x2範圍的60點傷害<br>
+        Lv3.風靈：攻擊40%機率造成3x3範圍的80點傷害<br>
+        Lv4.蒼嵐：攻擊45%機率造成3x3範圍的100點傷害<br>
+        Lv5.風魂：攻擊50%機率造成4x4範圍的120點傷害</span><br>
+      <span class="h2-blue">※水屬性※</span><br>
+      <span class="data-block">Lv1.水之：攻擊12%機率回復12點魔力<br>
+        Lv2.海嘯：攻擊14%機率回復14點魔力<br>
+        Lv3.水靈：攻擊16%機率回復16點魔力<br>
+        Lv4.霜凍：攻擊18%機率回復18點魔力<br>
+        Lv5.水魂：攻擊20%機率回復20點魔力</span><br>
+      <br><span class="h2-red">洗鍊武防品階卷軸</span><br>
+      <span class="h2-blue">※廢品※</span><br>
+      <span class="data-block">武器:傷害-2、命中-2、魔攻-2、力敏智-2、生命魔力-50<br>
+      防具:力敏智-1、抗魔-2、減免-2、生命魔力-40、回血魔-2、藥水量-1%</span><br>
+      <span class="h2-blue">※下品※</span><br>
+      <span class="data-block">武器:生命魔力+20<br>防具:生命魔力+10</span><br>
+      <span class="h2-blue">※上品※</span><br>
+      <span class="data-block">武器:傷害+1、命中+1、生命魔力+50<br>防具:減免+1、生命魔力+30</span><br>
+      <span class="h2-blue">※黃階※</span><br>
+      <span class="data-block">武器:傷害+2、命中+2、魔攻+1、力敏智+1、生命魔力+80<br>防具:抗魔+1、減免+2、生命魔力+50、回血魔+1</span><br>
+      <span class="h2-blue">※玄階※</span><br>
+      <span class="data-block">武器:傷害+3、命中+3、魔攻+2、力敏智+2、魅力+1、生命魔力+120<br>防具:力敏智+1、抗魔+1、減免+3、生命魔力+75、回血魔+2、藥水量+1%</span><br>
+      <span class="h2-blue">※地階※</span><br>
+      <span class="data-block">武器:傷害+4、命中+4、魔攻+3、力敏智+3、魅力+2、生命魔力+180<br>防具:力敏智+1、魅力+1、抗魔+2、減免+4、生命魔力+100、回血魔+3、藥水量+2%</span><br>
+      <span class="h2-blue">※天階※</span><br>
+      <span class="data-block">武器:傷害+5、命中+5、魔攻+4、力敏智+4、魅力+3、生命魔力+250<br>防具:力敏智+2、魅力+1、抗魔+3、減免+5、生命魔力+125、回血魔+4、藥水量+3%</span><br>
+      <br><span class="h2-red">技能卡介紹(裝備遠距武器觸發機率減半)</span><br>
+      <span class="data-block">獲取低階技能卡箱(技能卡無CD):無限大戰、藏寶地宮、武防擴孔區<br>
+      狩獵獲取技能卡箱，主城NPC可升階與重製技能卡箱<BR>武器插孔攻擊+1%觸發技能(相同卡片僅能插一張)<br>
+      防具插孔被攻擊+1%觸發技能(相同部位相同卡片僅能插一張)</span><br>
+      <span class="h2-blue">※低階技能卡※</span><br>
+      <span class="data-block">[光]箭、[初]級治癒術、[寒]冷戰慄、[專]注、[尖]刺盔甲、屬性防[禦]、幻覺：[歐]吉、[弱]化術<BR>
+	  [淨]化精神、[疾]病術、覺醒：[安]塔瑞斯、[附]加劇毒、魔法[防]禦</span><br>
+      <span class="h2-blue">※中階技能卡※</span><br>
+      <span class="data-block">[壞]物術、吸血鬼之[吻]、[堅]固防護、[增]幅防禦、[大]地防護、幻覺：巫[妖]、[暗]影閃避<BR>
+	  水之[元]氣、水之防[護]、[洞]察、[中]級治癒術、[火]焰武器、燃燒的火[球]、[毒]性抵抗、[狂]暴術<BR>
+	  生命之[泉]、[緩]速術、[耐]力、致命身[軀]、[魔]力奪取、幻覺：[鑽]石高崙、冰[錐]、龍之護[鎧]</span><br>
+      <span class="h2-blue">※高階技能卡※</span><br>
+      <span class="data-block">冰[雪]暴、[屬]性之火、[燃]燒鬥志、暴風神[射]、木乃伊的詛[咒]、[污]濁之水、風之[枷]鎖<BR>
+	  火風[暴]、烈炎[武]器、[烈]炎術、魔法消[除]、藥水[霜]化術、衝擊之[暈]、[鋼]鐵防護、[鏡]像<BR>
+	  [閃]避提升、[高]級治癒術、[雙]重破壞、雷[霆]風暴、骷[髏]毀壞、[奪]命之雷、魔法[相]消術</span><br>
+      <span class="h2-blue">※頂階技能卡※</span><br>
+      <span class="data-block">[三]重矢、[反]擊屏障、[屠]宰者、[流]星雨、烈焰之[魂]、生命的[祝]福、[破]壞盔甲<BR>
+	  [究]極光裂術、[精]準射擊、[聖]結界、[全]部治癒術</span><br>
+	  <span class="h2-blue">※九字真言技能卡(2%機率)※</span><br>
+      <span class="data-block">[臨]屠宰者、[兵]三重矢、[鬥]烈焰之魂、[者]究極光裂術、[皆]流星雨、[陣]聖結界、[列]破壞盔甲、[前]精準射擊、[行]反擊屏障</span><br>
+	  `,
+      // 9: 變身卡介紹
+      `<span style="color:#28a745; font-size:1.2rem; font-weight:bold;">┌由抽獎盒抽取變身卡，於變身卡NPC合成升階┐</span><BR>
+      <br><span style="color:gray; font-weight:bold;">白色變身卡：</span><br>
+      <span class="data-block">公主、女騎士、女妖精、男法師、男黑妖、龍騎士、女幻術</span><br>
+      <br><span style="color:green; font-weight:bold;">綠色變身卡：</span><br>
+      <span class="data-block">特羅斯、佐佐木小次郎、宮本武藏、屠龍者、趙雲、葉小釵、黑炎死騎</span><br>
+      <br><span style="color:blue; font-weight:bold;">藍色變身卡：</span><br>
+      <span class="data-block">女槍手、男槍手、斗篷女騎、斗篷男騎、白金死騎、呂布</span><br>
+      <br><span style="color:red; font-weight:bold;">紅色變身卡：</span><br>
+      <span class="data-block">公主、女騎士、女妖精、男法師、男黑妖、龍騎士、女幻術</span><br>
+      <br><span style="color:purple; font-weight:bold;">紫色變身卡：</span><br>
+      <span class="data-block">特羅斯、佐佐木小次郎、宮本武藏、屠龍者、趙雲、葉小釵、黑炎死騎</span><br>
+      <br><span style="color:#d4af37; font-weight:bold;">金色變身卡：</span><br>
+      <span class="data-block">女槍手、男槍手、斗篷女騎、斗篷男騎、白金死騎、呂布</span><br>
+      <br><span style="color:#008b8b; font-weight:bold;">白金變身卡：(跑速、攻速、施法小幅提升)</span><br>
+      <span class="data-block">吉爾塔斯、白金巴風特、赫發斯特斯、炙焰死騎、鋼鐵阿頓、神聖劍士、齊天大聖、格拉狄翁</span><br>`,
+
+      // 10: 娃娃介紹
+      `<span style="color:#28a745; font-size:1.2rem; font-weight:bold;">┌購買取得經驗娃娃，升級使用娃娃升級藥水┐</span><br>
+      <BR><span style="color:gray; font-weight:bold;">經驗娃娃：</span><br>
+      <span class="data-block">經驗公主LV1-LV10</span><br>
+      <BR><BR>
+      <span style="color:#28a745; font-size:1.2rem; font-weight:bold;">┌由抽獎盒抽取娃娃，於娃娃NPC合成升階┐</span><br>
+      <br><span style="color:gray; font-weight:bold;">白色娃娃：</span><br>
+      <span class="data-block">奎斯坦修、希爾黛斯、木偶、肥肥、蛇女、野狼寶寶、雪怪、高侖</span><br>
+      <br><span style="color:green; font-weight:bold;">綠色娃娃：</span><br>
+      <span class="data-block">小思克巴、長老、亞力安、聖誕雪人、美人魚、熔岩高崙</span><br>
+      <br><span style="color:blue; font-weight:bold;">藍色娃娃：</span><br>
+      <span class="data-block">巨人、黑長者、思克巴女皇、飛龍、食人妖精王、鑽石高崙</span><br>
+      <br><span style="color:red; font-weight:bold;">紅色娃娃：</span><br>
+      <span class="data-block">巫妖、獨眼巨人、騎士范德、幻象眼魔</span><br>
+      <br><span style="color:purple; font-weight:bold;">紫色娃娃：</span><br>
+      <span class="data-block">惡魔、死亡騎士、木乃伊王、艾莉絲</span><br>
+      <br><span style="color:#d4af37; font-weight:bold;">金色娃娃：</span><br>
+      <span class="data-block">寶寶-林德拜爾、寶寶-巴拉卡斯、寶寶-安塔瑞斯、寶寶-法利昂<BR>
+      金色娃娃可使用娃娃升級藥水，升級至幼年、成年、龍王、龍皇共五個等級</span><br>
+      <br><span style="color:#008b8b; font-weight:bold;">白金娃娃：</span><br>
+      <span class="data-block">三藏法師、齊天大聖、天蓬元帥、金身羅漢<BR>`,
+
+      // 11: 下載專區
+      `<span class="h2-red">遊戲主程式</span><BR>
+      <button class="download-btn" onclick="window.open('https://drive.google.com/file/d/1uzeRXypn8RQYPO_itLMyHx8eopogIZQj/view?usp=sharing','_blank')">載點1 (Google Drive)</button>
+      <button class="download-btn" onclick="window.open('https://u.pcloud.link/publink/show?code=XZ3qQC5Z0YPW83X9lRpUhepP4lpM45TYbVN7','_blank')">載點2 (pCloud)</button>
+      <button class="download-btn" onclick="window.open('https://u.pcloud.link/publink/show?code=XZx68A5ZTc40Yjqxb3zy200U98myh7tRV0eX','_blank')">載點3 (備用)</button>
+      <br><br>
+      <span class="data-block">
+        下載後解壓縮，解壓縮密碼：<strong style="color:red;">12345</strong>，執行 Login.exe 更新完成即可登入<br>
+        如有問題可先至疑難雜症查看常見問題解決方式，仍無法解決可聯繫客服協助處理。
+      </span>
+      <br><br>
+      <span class="h2-red">LinhelperZ (輔助程式設定檔)</span><BR>
+      <a href="Share/LinHelperZ.txt" download="LinHelperZ.txt" class="download-btn">載點下載</a>
+      <BR><br>
+      <span class="data-block">
+        下載後放入天堂主程式覆蓋舊檔，角色離開遊戲再次登入，輔助頁面會出現變卷選項。<br>
+      </span>`,
+
+      // 12: 贊助相關
+      `<button class="download-btn" onclick="openDisclaimer()">※※免責聲明※※</button><BR><BR>
+      <span class="h2-red">開服需要成本，小小贊助即可，用以維護伺服器<BR>
+      請聯繫LINE客服提供贊助方式<BR>
+      只接受小額贊助，感謝大家支持。​​<BR>
+      請玩家確認是出自於個人意願贊助伺服器，贊助後無法退費。</span><BR><br>
+      <span class="h2-blue">LINE管理員：@774twnfm<BR>
+      或按右下 Donate 按鈕掃描 QR 碼</span><BR><BR>
+      <span class="h2-purple">贊助方案選擇如下：<BR>
+      1.元寶比值1:50。 2.每周寶箱50元。 3.每月寶箱100元。 4.新手基礎禮包100元。 5.新手高階禮包1000元。 6.萬能藥販售</span><BR>
+      <BR><span class="h2-green">新手基礎禮包100元 (內容物皆可轉移)：</span><BR>
+      <span class="data-block">+7新手商店武器製作圖紙(自選)、經驗娃娃LV4、VIP4、海音戰場徽章(第四階段)、傲慢的祝福水晶LV4、<BR>
+      白娃娃30箱、白變身卡30箱、天幣500萬、1000元寶</span><BR>
+      <BR><span class="h2-green">新手高階禮包1000元 (內容物皆可轉移)：</span><BR>
+      <span class="data-block">+8新手商店武器製作圖紙(自選)、經驗娃娃LV10、VIP9、精墓戰場徽章(滿階)、傲慢的祝福水晶LV9、<BR>
+      名譽貨幣(永久)、巧克力蛋糕(永久)、白娃娃300箱、白變身卡300箱、天幣1億、1萬元寶</span><BR>
+      <BR><span class="h2-green">50元贊助方案-每周寶箱 (每個角色身上只能有一個，無法領取第二個，不可轉移)：</span><BR>
+      <span class="data-block">寶箱可以開啟7次，每次開啟需等待20小時，才可再次開啟<BR>
+      單次開啟獲得500元寶、100萬天幣，總共3500元寶、700萬天幣</span><BR>
+      <BR><span class="h2-green">100元贊助方案-每月寶箱 (每個角色身上只能有一個，無法領取第二個，不可轉移)：</span><BR>
+      <span class="data-block">寶箱可以開啟30次，每次開啟需等待20小時，才可再次開啟<BR>
+      單次開啟獲得400元寶、100萬天幣，總共12000元寶、3000萬天幣</span><BR>
+      <BR><span class="h2-green">萬能藥販售 (能力最高35點，不限制使用瓶數，可轉移)：</span><BR>
+      <span class="data-block">單筆購買一瓶每瓶5元，十瓶以上每瓶4元，體質、精神隨時可使用，其餘能力須1轉後使用</span><BR>`,
+
+      // 13: 留言板
+      "__ONLINE_COMMENT__",
+
+      // 14: 疑難雜症
+      "疑難雜症",
+      "待更新","待更新","待更新","待更新","待更新"
+    ];
+
+
+    // ================= 頁面初始化與導航互動 =================
+    window.addEventListener("DOMContentLoaded", () => {
+      const headerNav = document.getElementById("headerNav");
+      List.forEach((name, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = name;
+        btn.onclick = () => showData(i, btn);
+        headerNav.appendChild(btn);
+      });
+    });
+
+    function showData(index, btnElem) {
+      const title = List[index];
+      const text = DATA[index];
+      const content = document.getElementById('content');
+
+      // 更新按鈕 active 樣式
+      document.querySelectorAll(".header-nav button").forEach(b => b.classList.remove("active"));
+      if (btnElem) btnElem.classList.add("active");
+
+      // 清除留言板自動定時器
+      if (commentInterval) {
+        clearInterval(commentInterval);
+        commentInterval = null;
+      }
+
+      // 疑難雜症內嵌 (Modal 彈窗避免被阻擋)
+      if (title === "疑難雜症") {
+        openFaqModal();
+        return;
+      }
+
+      // 待更新提示
+      if (title === "待更新") {
+        alert(text);
+        return;
+      }
+
+      // Q&A 留言板
+      if (text === "__ONLINE_COMMENT__") {
+        content.innerHTML = `
+          <div class="content-box">
+            <h2 class="h2-purple">遊戲內容Q&A 問答板 (提問 / 回覆)</h2>
+            <div style="margin-top:15px;">
+              <input id="visitorName" placeholder="暱稱 (玩家)" style="width:250px; max-width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:4px;"><br>
+              <textarea id="questionInput" style="width:100%; max-width:550px; height:60px; padding:8px; border:1px solid #ccc; border-radius:4px; resize:none;" placeholder="請輸入你的問題"></textarea><br>
+              <button class="download-btn" onclick="sendQuestion()">發佈問題</button>
+            </div>
+            
+            <div style="margin-top:20px; border-top:1px dashed #ccc; padding-top:15px;">
+              <input id="answerName" placeholder="暱稱 (玩家)" style="width:250px; max-width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:4px;"><br>
+              <textarea id="answerInput" style="width:100%; max-width:550px; height:60px; padding:8px; border:1px solid #ccc; border-radius:4px; resize:none;" placeholder="請輸入你的回答"></textarea><br>
+              <button class="download-btn" onclick="sendAnswer()">發佈回答</button>
+            </div>
+
+            <div id="qaList" style="margin-top:25px;">載入問答紀錄中...</div>
+          </div>
+        `;
+        loadQA();
+        commentInterval = setInterval(loadQA, 10000);
+        return;
+      }
+
+      // 一般資料展示
+      content.innerHTML = `
+        <div class="content-box">
+          <div class="h2-purple" style="border-bottom:2px solid #ddd; padding-bottom:8px; margin-bottom:15px;">${title}</div>
+          <div style="margin-top: 1rem;">${text}</div>
+        </div>
+      `;
+    }
+
+    function getVisitorID() {
+      let id = localStorage.getItem("visitor_id");
+      if (!id || !id.includes("訪客")) {
+        id = "訪客" + Math.random().toString(36).substring(2, 7);
+        localStorage.setItem("visitor_id", id);
+      }
+      return id;
+    }
+
+    async function sendQuestion() {
+      const visitor = document.getElementById("visitorName").value.trim() || getVisitorID();
+      const question = document.getElementById("questionInput").value.trim();
+      if (!question) return alert("請輸入問題");
+
+      await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({ visitor, question })
+      });
+      document.getElementById("questionInput").value = "";
+      loadQA();
+    }
+
+    function prepareAnswer(qid) {
+      currentQuestionId = qid;
+      alert("你正在回答問題 ID: " + qid);
+    }
+
+    async function sendAnswer() {
+      if (!currentQuestionId) return alert("請先點選下方【回答這個問題】按鈕選擇問題");
+      const answerer = document.getElementById("answerName").value.trim() || "玩家";
+      const answer = document.getElementById("answerInput").value.trim();
+      if (!answer) return alert("請輸入回答");
+
+      await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({ answerer, answer, questionId: currentQuestionId })
+      });
+      document.getElementById("answerInput").value = "";
+      loadQA();
+    }
+
+    async function loadQA() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        const qaList = document.getElementById("qaList");
+        if (!qaList) return;
+
+        data.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+        qaList.innerHTML = data.map(item => {
+          const answersHtml = (item.answers && item.answers.length > 0)
+            ? item.answers.map(a => {
+                let displayName = a.answerer;
+                let displayColor = "#333";
+                if (a.answerer === "<懷舊GM>") {
+                  displayName = "GM";
+                  displayColor = "red";
+                } else if (a.answerer === "GM") {
+                  displayName = "玩家";
+                }
+
+                return `
+                  <div style="margin-left:20px; margin-top:6px; padding:6px; background:#f5f5f5; border-radius:4px;">
+                    <b>${displayName} 回覆：</b>
+                    <span style="color:${displayColor};">${a.answer}</span>
+                    <small style="margin-left:10px; color:#888;">${new Date(a.time).toLocaleString()}</small>
+                  </div>
+                `;
+              }).join("")
+            : `<div style="margin-left:20px; margin-top:5px; color:#999;"><i>尚未有人回覆</i></div>`;
+
+          return `
+            <div style="padding:12px; border-bottom:1px solid #eee; margin-bottom:8px;">
+              <small style="color:#888;">${new Date(item.time).toLocaleString()}</small>
+              <b style="color:#0056b3;"> ${item.visitor}</b> 問：<br>
+              <div style="margin: 6px 0 6px 15px; color:#222; font-weight:500;">${item.question}</div>
+              ${answersHtml}
+              <div style="margin-top:8px;">
+                <button class="download-btn" style="padding:4px 10px; font-size:0.85rem;" onclick="prepareAnswer('${item.id}')">回答這個問題</button>
+              </div>
+            </div>
+          `;
+        }).join("");
+      } catch(err) {
+        console.log("讀取Q&A失敗:", err);
+      }
+    }
+
+    // ================= 彈窗與遮罩控制函式 (防阻擋) =================
+    function openCustomModal(html) {
+      const modal = document.getElementById("infoModal");
+      const body = document.getElementById("infoModalBody");
+      if (!modal || !body) return;
+      const cleanedHtml = html.replace(/window\.close\(\)/g, "closeCustomModal()");
+      body.innerHTML = cleanedHtml;
+      modal.style.display = "block";
+    }
+
+    function closeCustomModal() {
+      const modal = document.getElementById("infoModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function openFaqModal() {
+      const modal = document.getElementById("faqModal");
+      if (modal) modal.style.display = "block";
+    }
+
+    function closeFaqModal() {
+      const modal = document.getElementById("faqModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function handleModalClick(e, modalId) {
+      if (e.target.id === modalId) {
+        document.getElementById(modalId).style.display = "none";
+      }
+    }
+
+    // 各活動彈跳視窗呼叫
+    function openClanComeIn() {
+      
+      openCustomModal(`
+        <html>
+          <head><title>AT團申請</title></head>
+          <body style="font-family:Arial, sans-serif; padding:20px; line-height:1.7;">
+            <h2 style="color:red; text-align:center;">※※AT團申請※※</h2>
+            <p>1. 人數至少5人加入LINE群組，並創立好血盟，AT成員需加入血盟。</p>
+            <p>2. 留言血盟名稱與標註GM、AT成員在社群的名子，查核血盟與LINE群組後，依照人數發放禮包。</p>
+            <p>3. 一個LINE帳號只可領取一份AT團禮包，一個角色只能開啟一個AT禮包，角色超過七轉無法開啟禮包。</p>
+            <p>4. 人數若有增加，可再次申請，核對人數後會補發差額的禮包。EX 上次申請10人、這次申請12人，補發2包禮包</p>
+            <p>5. 禮包內容物: +8新手武器製作圖紙、AT新手護身符(3日綁)、金幣*5百萬、懷舊代幣(綁)*250、巧克力蛋糕(綁定)*100、名譽貨幣(綁定)*100、經驗藥水200%(綁)*100</p>
+            <p>AT新手護身符(3日)效果: 血量+300、魔量+200、經驗+20%、回血+10、回魔、魔防、物減、魔減都+5、力、敏、智、近傷、近命、遠傷、遠命、魔攻都+2、防禦-2</p>
+            <div style="text-align:center; margin-top:20px;"><button onclick="window.close()" style="padding:6px 15px;">關閉視窗</button></div>
+          </body>
+        </html>
+      `);
+    }
+
+    function openCastleWar() {
+      
+      openCustomModal(`
+        <html>
+          <head><title>攻城戰介紹</title></head>
+          <body style="font-family:Arial, sans-serif; padding:20px; line-height:1.7;">
+            <h2 style="color:red; text-align:center;">※※奇岩攻城戰(每週六重啟收回城堡)※※</h2>
+            <p>1. 每周六晚間8點-9點為攻城戰時間，需擁有盟徽的血盟盟主，在無變身狀態，才可以對城堡宣戰。</p>
+            <p>2. 破壞守護者之塔，塔底會有王冠(按右鍵挑選重疊物件)，盟主無變身且空手狀態攻擊王冠即可佔領城堡。</p>
+            <p>3. 攻城期間可互相不斷佔領城堡，直至攻城時間結束，由最後佔領城堡的血盟攻下城堡。</p>
+            <p>4. 攻下城堡的血盟線上成員，自動發放攻城獎勵(懷舊幣500、天幣300萬)，並獲得城堡附加能力。</p>
+            <p>5. 攻城剛開始會有大量BOSS駐守城堡內，若未擊殺攻城結束後會自行離去。</p>
+            <div style="text-align:center; margin-top:20px;"><button onclick="window.close()" style="padding:6px 15px;">關閉視窗</button></div>
+          </body>
+        </html>
+      `);
+    }
+
+    function openBossSkillDesc() {
+      
+      openCustomModal(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>BOSS多重施法說明</title>
+          </head>
+          <body style="font-family: Arial, 'Microsoft JhengHei', sans-serif; background-color: #ffffff; color: #333333; padding: 20px; line-height: 1.7;">
+            <h2 style="color: #d9534f; text-align: center; margin-bottom: 20px;">※※ 【BOSS多重施法說明】 ※※</h2>
+            
+            <p><b>1. 【蓄力與引爆特性】</b><br>
+            首領施法時會進入蓄力無敵狀態，同時出現特效與文字，蓄力完成後鎖定範圍內所有目標腳下引爆。每個目標皆會向外擴散 <b>5×5 格（半徑 2 格）</b> 範圍魔法傷害，站位相近時會互相波及。</p>
+            
+            <p><b>2. 【團隊抱團保護（上限約 3 倍）】</b><br>
+            身旁 2 格內有隊友且<span style="color: #0275d8; font-weight: bold;">保持正常站位（未與首領重疊）</span>時，視為抱團分攤狀態。不論被身旁隊友波及多少次，每人自身承受的<b>總傷害上限強制封頂約 3 倍左右</b>，可大幅降低減員風險。</p>
+            
+            <p><b>3. 【孤身風箏懲罰（最高約 5 倍）】</b><br>
+            若身旁沒有任何隊友，視為孤軍作戰。離首領越遠傷害倍增越嚴重，最高可承受高達 <span style="color: #d9534f; font-weight: bold;">5 倍左右</span> 的毀滅性重擊，切勿嘗試單人遠程拉打！</p>
+            
+            <p><b>4. 【重疊BOSS連帶懲罰（謹慎評估）】</b><br>
+            若有玩家<span style="color: #c9302c; font-weight: bold;">與首領座標完全重疊（0 格）</span>，將<b>解除保護上限(每一位傷害上升10~20%)</b>！<br>
+            ⚠️ <b>連帶危害</b>：重疊者腳下的爆炸<b>不會被限制</b>，同時波及身旁所有隊友！重疊踩點的人數越多，加總傷害會越高，請斟酌是否重疊BOSS！</p>
+            
+            <p><b>5. 【戰術結論】</b><br>
+            蓄力時自身防禦手段上好上滿，全體近戰應於首領身旁1~2格，越近越好<b>集中抱團</b>輸出；遠程可進圈抱團或遠離傷害範圍</p>
+            
+            <div style="text-align: center; margin-top: 25px;">
+              <button onclick="window.close()" style="padding: 7px 20px; font-size: 14px; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; background-color: #f8f9fa;">關閉視窗</button>
+            </div>
+          </body>
+        </html>
+      `);
+    }
+	function openBountySheriffDesc() {
+	  
+	  openCustomModal(`
+		<!DOCTYPE html>
+		<html>
+		  <head>
+			<meta charset="utf-8">
+			<title>【江湖通緝令】懸賞捕快與殺人奪寶活動說明</title>
+		  </head>
+		  <body style="font-family: Arial, 'Microsoft JhengHei', sans-serif; background-color: #ffffff; color: #333333; padding: 25px; line-height: 1.7; font-size: 14px;">
+			<h2 style="color: #c9302c; text-align: center; margin-bottom: 20px; letter-spacing: 1px;">⚔️【江湖通緝令】懸賞捕快與殺人奪寶活動說明 ⚔️</h2>
+			
+			<p><b>1. 【擊殺奪寶與惡名通緝】</b><br>
+			凡達到指定等級以上之戰鬥，擊殺對手時將發動<b>奪寶機制</b>掠奪對方身上200萬~10%的<span style="color: #c9302c; font-weight: bold;">金幣</span>。<br>
+			掠奪之金幣採取分流機制：<span style="color: #0275d8; font-weight: bold;">50% 直接納入殺手背包</span>，其餘 <span style="color: #c9302c; font-weight: bold;">50% 自動存入自身懸賞池</span>，同時進行全服江湖公告，<span style="color: #c9302c; font-weight: bold;">只要在一般區域殺人，不管殺好人還壞人</span>，都會變成有懸賞的「通緝犯」！</p>
+			
+			<p><b>2. 【正義捕快・緝凶賞金規則】</b><br>
+			任何人只要討伐帶有懸賞金的通緝犯，即可化身捕快領取賞金：<br>
+			• <b>懸賞金 ≤ 500 萬</b>：擊殺後<b>全額領走</b>！<br>
+			• <b>懸賞金 &gt; 500 萬</b>：每次擊殺領取其<b>總懸賞金之 50%</b>（保底最少領取 500 萬）！<br>
+			💰 <b>貼心防溢位機制</b>：扣除衙門5%稅金後實領發放。實領金額達 <b>1 億以上自動兌換為【金條(一億)】</b>，尾數發放金幣，無負重爆倉煩惱。</p>
+			
+			<p><b>3. 【每週三結算・躲過一週領取賞金】</b><br>
+			每逢<b>週三例行維護</b>進行全服懸賞大結算。<br>
+			通緝犯若憑藉過人實力生存、未被捕快領走身上賞金，剩餘懸賞金，將全額轉入待領取池！可至村莊【江湖公佈欄】點選「<b>【懸賞結算】領取剩餘懸賞金</b>」將所有未被領走之賣命錢領回背包！各項生涯擊殺與死亡戰績永久保存。</p>
+			
+			<p><b>4. 【掛機受害保護】</b><br>
+			為保障安心掛機環境，玩家於內掛狀態遭其他玩家或其寵物/召喚物擊殺後，會自動復活並獲取以下保護：<br>
+			• <b>基礎保護</b>：自動獲得 <span style="color: #2e6da4; font-weight: bold;">2 小時掛機防護罩</span>。<br>
+			• <b>雙倍延長</b>：若背包攜帶<b>專用保護延長道具</b>，將自動消耗 1 個並<b>延長為 4 小時</b>雙倍保護！<br>
+			⚠️ <b>保護效果</b>：處於保護狀態且開啟內掛時，<b>完全免疫所有玩家之普通物理攻擊與魔法技能傷害</b>離線後失效。</p>
+			
+			<p><b>5. 【懸賞公佈欄・三大風雲榜】</b><br>
+			各大村莊公佈欄提供即時戰況查閱：<br>
+			• <span style="color: #c9302c; font-weight: bold;">【通緝榜】</span>：展示全服殺人數最多、懸賞金最高之十大通緝惡徒。<br>
+			• <span style="color: #0275d8; font-weight: bold;">【捕快榜】</span>：展示擊殺通緝犯次數最多、領取總賞金最高之十大神捕。<br>
+			• <span style="color: #8a6d3b; font-weight: bold;">【受害榜】</span>：記錄受搶奪次數與被奪金幣最多之名冊，知恥而後勇！</p>
+			
+			<div style="text-align: center; margin-top: 30px;">
+			  <button onclick="window.close()" style="padding: 8px 24px; font-size: 14px; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; background-color: #f8f9fa; font-weight: bold;">關閉視窗</button>
+			</div>
+		  </body>
+		</html>
+	  `);
+	}	
+	function openSurvivalEvent() {
+	  
+	  openCustomModal(`
+		<!DOCTYPE html>
+		<html>
+		  <head>
+			<meta charset="UTF-8">
+			<title>九點大逃殺活動說明</title>
+			<style>
+			  * { box-sizing: border-box; margin: 0; padding: 0; }
+			  body {
+				font-family: "Microsoft JhengHei", Arial, sans-serif;
+				background-color: #f7f9fa;
+				color: #333333;
+				padding: 20px;
+				line-height: 1.6;
+			  }
+			  .card {
+				background: #ffffff;
+				border: 1px solid #e1e4e8;
+				border-radius: 10px;
+				padding: 22px 26px;
+				box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+			  }
+			  h2 {
+				text-align: center;
+				color: #c92a2a;
+				font-size: 22px;
+				margin-bottom: 18px;
+				border-bottom: 2px solid #ff6b6b;
+				padding-bottom: 10px;
+				letter-spacing: 1px;
+			  }
+			  .section {
+				background: #f8f9fa;
+				border: 1px solid #e9ecef;
+				border-radius: 8px;
+				padding: 14px 16px;
+				margin-bottom: 14px;
+				border-left: 5px solid #1971c2;
+			  }
+			  .section.pvp { border-left-color: #e03131; }
+			  .section.boss { border-left-color: #f08c00; }
+			  .section.notice { border-left-color: #0ca678; }
+			  .sec-title {
+				font-size: 15px;
+				font-weight: bold;
+				color: #212529;
+				margin-bottom: 8px;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			  }
+			  .tag {
+				font-size: 12px;
+				padding: 2px 8px;
+				border-radius: 4px;
+				font-weight: 500;
+			  }
+			  .tag-blue { background: #e7f5ff; color: #1971c2; border: 1px solid #a5d8ff; }
+			  .tag-red { background: #fff5f5; color: #e03131; border: 1px solid #ffc9c9; }
+			  .tag-gold { background: #fff9db; color: #e67700; border: 1px solid #ffec99; }
+			  ul { padding-left: 20px; margin-top: 4px; }
+			  li { font-size: 13.5px; margin-bottom: 5px; color: #495057; }
+			  li strong { color: #d9480f; }
+			  .sub-list { margin-top: 4px; padding-left: 18px; list-style-type: circle; }
+			  .warn-box {
+				background: #fff5f5;
+				border: 1px dashed #ffa8a8;
+				border-radius: 6px;
+				padding: 10px 14px;
+				margin-top: 10px;
+				font-size: 13px;
+				color: #c92a2a;
+				line-height: 1.6;
+			  }
+			  .btn-container { text-align: center; margin-top: 20px; }
+			  .btn-close {
+				background: #495057;
+				color: #ffffff;
+				border: none;
+				padding: 8px 30px;
+				border-radius: 6px;
+				font-size: 14px;
+				font-weight: bold;
+				cursor: pointer;
+				transition: all 0.2s ease;
+			  }
+			  .btn-close:hover {
+				background: #212529;
+			  }
+			
+    /* 通用內容彈窗 (取代 window.open 避免瀏覽器攔截阻擋) */
+    .info-modal {
+      display: none;
+      position: fixed;
+      z-index: 2500;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(2px);
+    }
+    .info-modal-wrapper {
+      position: relative;
+      background: #ffffff;
+      margin: 4vh auto;
+      width: 90%;
+      max-width: 920px;
+      max-height: 90vh;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: modalFadeIn 0.25s ease;
+    }
+    .info-modal-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #555;
+      background: rgba(255,255,255,0.85);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      line-height: 32px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.2s;
+    }
+    .info-modal-close-btn:hover {
+      color: #000;
+      background: #eee;
+    }
+    .info-modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      max-height: calc(90vh - 40px);
+      -webkit-overflow-scrolling: touch;
+      color: #333;
+    }
+    .faq-modal-iframe {
+      width: 100%;
+      height: calc(88vh - 40px);
+      border: none;
+      display: block;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+		  </head>
+		  <body>
+			<div class="card">
+			  <h2>※※ 九點大逃殺活動指南 ※※</h2>
+
+			  <!-- 階段一 -->
+			  <div class="section">
+				<div class="sec-title">
+				  <span>【第一階段】秘境狩獵與打寶區</span>
+				  <span class="tag tag-blue">開戰前 5 分鐘準備</span>
+				</div>
+				<ul>
+				  <li>每晚活動開啟時，全服廣播後可透過<strong>傳送師</strong>或<strong>活動 NPC</strong> 傳送進場。</li>
+				  <li><strong>隱藏寶藏 BOSS</strong>：打寶區內全體擊殺<strong>每滿 100 隻怪物</strong>，立即召喚隱藏寶藏王降臨，擊倒可掉落豐富稀有道具！</li>
+				  <li>準備時間倒數結束後，全員將自動傳送至第二階段大逃殺戰場。</li>
+				</ul>
+			  </div>
+
+			  <!-- 階段二：分隊廝殺 -->
+			  <div class="section pvp">
+				<div class="sec-title">
+				  <span>【第二階段模式 A】紅藍分隊廝殺戰</span>
+				  <span class="tag tag-red">陣營血戰</span>
+				</div>
+				<ul>
+				  <li><strong>隨機陣營</strong>：全員隨機分配為【紅隊】與【藍隊】，敵對顯示紫名，同隊可見血條。</li>
+				  <li><strong>神之詛咒（天罰平衡）</strong>：每分鐘統計雙方人數，<strong>人數較多佔優勢的一方</strong>全員將受到神之詛咒（隨機賦予負面狀態並強制隨機瞬移）！</li>
+				  <li><strong>連殺與榮譽</strong>：戰場即時公告擊殺王頭銜與擊殺人數（同隊及同 IP 互刷不計分）。</li>
+				  <li><strong>勝負結算機制</strong>：
+					<ul class="sub-list">
+					  <li><strong>勝方</strong>：獲得勝場大獎 + 團隊擊殺積分（最高上限 30 分）。</li>
+					  <li><strong>敗方</strong>：獲得保底 3 分 + <strong>團隊擊殺分 2 倍加碼</strong>（最高上限 30 分）。</li>
+					  <li><strong>激烈平局</strong>：雙方同歸於盡或戰況激烈平手，全員發放「英勇奮戰大獎（大獎之一半）」。</li>
+					</ul>
+				  </li>
+				</ul>
+			  </div>
+
+			  <!-- 階段二：BOSS 生存 -->
+			  <div class="section boss">
+				<div class="sec-title">
+				  <span>【第二階段模式 B】終極 BOSS 生存戰</span>
+				  <span class="tag tag-gold">極限生存</span>
+				</div>
+				<ul>
+				  <li><strong>終極王者降臨</strong>：戰場內刷新滅世生存 BOSS，傷害極高，考驗全員走位與生存能力！</li>
+				  <li><strong>仇恨疲乏</strong>：BOSS 追擊同一名目標<strong>超過 10 秒</strong>會失去耐心，強制重置仇恨尋找新獵物。</li>
+				  <li><strong>空間扭曲突襲（每30秒）</strong>：每半分鐘 BOSS 怒吼扭曲空間，全員隨機施加負面詛咒並強制瞬移。</li>
+				  <li><strong>絕望增援挑戰</strong>：開戰 5 分鐘後，若存活人數 ≥ 30 人且存活率高於 50%，將額外召喚第二隻甚至第三隻復仇 BOSS 增援！</li>
+				  <li><strong>生存結算</strong>：時間結束時<strong>只要有人存活全體即獲勝</strong>，全員發放大獎；若撐過增援 BOSS 考驗，每存活 1 人全體額外多得 +1 積分（最高加碼 30 分）。全滅則發放 10 積分安慰獎。</li>
+				</ul>
+			  </div>
+
+			  <!-- 注意事項 -->
+			  <div class="section notice">
+				<div class="sec-title">
+				  <span>【重要規則】生存積分與防逃機制</span>
+				</div>
+				<ul>
+				  <li>活動獲取之<strong>生存積分券</strong>可至村莊「生存積分商店」購買專屬商品。</li>
+				</ul>
+				<div class="warn-box">
+				  ⚠️ <strong>防逃跑懲處</strong>：必須<strong>戰鬥至最後結算</strong>或<strong>在場內合法戰死</strong>方可領取正常獎勵。<br>
+				  若非戰死狀態提前回村、離場或順移脫離，視為逃兵，<strong>取消大獎與擊殺加乘，僅能獲得 3 點保底積分！</strong>
+				</div>
+			  </div>
+
+			  <div class="btn-container">
+				<button class="btn-close" onclick="window.close()">關閉視窗</button>
+			  </div>
+			</div>
+		  </body>
+		</html>
+	  `);
+	  
+	}
+
+    function open9clock40event() {
+      
+      openCustomModal(`
+        <html>
+          <head><title>九點四十分寶藏地宮</title></head>
+          <body style="font-family:Arial, sans-serif; padding:20px; line-height:1.7;">
+            <h2 style="color:red; text-align:center;">※※九點半寶藏地宮※※</h2>
+            <p>1. 每晚九點四十分，主城廣播某處出現兩個傳送陣(不同區域)，繳納100萬進場奪寶。</p>
+            <p>2. 地圖內有寶藏怪物擊殺後獲取稀有道具，地圖內不可使用內掛。</p>
+            <p>3. 剩餘怪物數量會在地圖內廣播通知，總數一百隻怪物，死亡後不再復活。</p>
+            <div style="text-align:center; margin-top:20px;"><button onclick="window.close()" style="padding:6px 15px;">關閉視窗</button></div>
+          </body>
+        </html>
+      `);
+    }
+
+    function open10clockevent() {
+      
+      openCustomModal(`
+        <html>
+          <head><title>十點無限大戰</title></head>
+          <body style="font-family:Arial, sans-serif; padding:20px; line-height:1.7;">
+            <h2 style="color:red; text-align:center;">※※十點無限大戰※※</h2>
+            <p>1. 每晚10點-10點半可由傳送師進場，前十波會召喚低中高階BOSS，最後一波為最終BOSS。</p>
+            <p>2. 初中高階BOSS分布在上右下方，最後一波則在中間，可依據自身能力討伐。</p>
+            <p>3. 場內戰利品採平均分配制，造成傷害即可分配，餘數則依傷害排名順序分配。</p>
+            <p>4. 場內可自由進出並且死亡無任何懲罰。</p>
+            <div style="text-align:center; margin-top:20px;"><button onclick="window.close()" style="padding:6px 15px;">關閉視窗</button></div>
+          </body>
+        </html>
+      `);
+    }
+
+    function openTimeClockevent() {
+      
+      openCustomModal(`
+        <html>
+          <head><title>定時獎勵怪出沒</title></head>
+          <body style="font-family:Arial, sans-serif; padding:20px; line-height:1.7;">
+            <h2 style="color:red; text-align:center;">※※定時獎勵怪出沒※※</h2>
+            <p>1. 每日早晚3、6、9、12點及加碼晚上7、8、10、11點，會廣播100隻惡棍地痞在說話之島或海賊島出沒。</p>
+            <p>2. 擊殺可獲取懷舊幣、元寶、與稀有道具，此為獎勵新手可輕易擊殺，未擊殺的惡棍地痞不會消失。</p>
+            <p>3. 特別注意：內掛不會攻擊他、冰雪暴也無法傷害他。</p>
+            <div style="text-align:center; margin-top:20px;"><button onclick="window.close()" style="padding:6px 15px;">關閉視窗</button></div>
+          </body>
+        </html>
+      `);
+    }
+
+function openAcademyBattle() {
+  // 判斷裝置寬度，若為手機螢幕則以全螢幕或最大比例開啟
+  const isMobile = window.innerWidth <= 768;
+  const popupWidth = isMobile ? window.innerWidth : Math.min(960, window.innerWidth);
+  const popupHeight = isMobile ? window.innerHeight : Math.min(820, window.innerHeight);
+  
+  let popup = window.open(
+    "",
+    "Disclaimer",
+    `width=${popupWidth},height=${popupHeight},scrollbars=yes,resizable=yes`
+  );
+
+  if (!popup) {
+    alert("彈跳視窗已被瀏覽器封鎖，請允許開啟彈跳視窗後再試。");
+    return;
+  }
+
+  popup.document.write(`
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+      <head>
+        <meta charset="utf-8">
+        <!-- 關鍵：加入 Viewport 標籤以適配行動裝置 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>『學院戰場』活動完整介紹指南</title>
+        <style>
+          * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+          }
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 24px 18px;
+            line-height: 1.7;
+            color: #222;
+            background-color: #fbfbfb;
+            margin: 0;
+            word-break: break-word;
+          }
+          h2 {
+            color: #b30000;
+            text-align: center;
+            border-bottom: 2px solid #b30000;
+            padding-bottom: 12px;
+            margin: 0 0 20px 0;
+            font-size: 22px;
+          }
+          h3 {
+            color: #0b4f8a;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            border-left: 5px solid #0b4f8a;
+            padding-left: 10px;
+            font-size: 16.5px;
+          }
+          p, li {
+            font-size: 14.5px;
+            margin: 6px 0;
+          }
+          ul {
+            padding-left: 20px;
+            margin: 6px 0;
+          }
+          ul ul {
+            padding-left: 18px;
+          }
+          .highlight {
+            color: #b30000;
+            font-weight: bold;
+          }
+          .faction-pojun {
+            color: #b30000;
+            font-weight: bold;
+          }
+          .faction-yushou {
+            color: #0b4f8a;
+            font-weight: bold;
+          }
+          .tag-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 6px;
+            margin-top: 8px;
+          }
+          .tag-title {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef4fa;
+            border: 1px solid #b8d4ee;
+            color: #0b4f8a;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+          }
+          .objective-box {
+            background-color: #f7f9fa;
+            border: 1px solid #dbe2e8;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin: 12px 0;
+          }
+          .warning-box {
+            background-color: #fff2f2;
+            border: 1.5px solid #d9534f;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin-top: 20px;
+          }
+          .btn-container {
+            text-align: center;
+            margin-top: 30px;
+            padding-bottom: 15px;
+          }
+          .btn-close {
+            display: inline-block;
+            width: 100%;
+            max-width: 240px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            background: #333;
+            color: #fff;
+            border: none;
+            transition: background 0.2s;
+          }
+          .btn-close:active, .btn-close:hover {
+            background: #555;
+          }
+
+          /* 手機版微調 */
+          @media (max-width: 600px) {
+            body {
+              padding: 16px 14px;
+              line-height: 1.65;
+            }
+            h2 {
+              font-size: 19px;
+            }
+            h3 {
+              font-size: 15.5px;
+            }
+            p, li {
+              font-size: 14px;
+            }
+            ul {
+              padding-left: 16px;
+            }
+            .objective-box, .warning-box {
+              padding: 12px;
+            }
+            .tag-container {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <h2>⚔️『學院戰場 2.0』活動完整指南 ⚔️</h2>
+
+        <h3>【一、 學院陣營與模式投票】</h3>
+        <ul>
+          <li><b>學院選擇</b>：請至主城尋找「學院管理員」選擇加入 <span class="faction-pojun">破軍學院</span> 或 <span class="faction-yushou">禦守學院</span>。可免費退學（學院積分歸零），亦可透過元寶商人購買「轉學證明」保留積分轉學。</li>
+          <li><b>活動進程</b>：每日活動開放前 5 分鐘進行全服廣播並開啟「戰場模式投票」，活動正式開啟後戰鬥時間為 20 分鐘，時間截止時地圖內所有玩家將自動傳送回主城並進行最終結算。</li>
+          <li><b>分隊模式投票</b>：玩家可於管理員處投下期望的模式（1: 原學院分隊、2: 個人全隨機分隊、3: 組隊隨機分隊）。開門時系統將由<b>前兩高票依比例抽籤決定</b>，避免單一陣營惡意灌票（抽中個人隨機模式時，進場將自動退出隊伍各自為戰）。</li>
+        </ul>
+
+        <h3>【二、 進場規則、身分匿名與貢獻度達標】</h3>
+        <ul>
+          <li><b>入場與陣營基地</b>：活動開始後由傳送師進場，地圖左側為破軍傳入與復活點，右側為禦守傳入與復活點。雙方陣營基地配置守護教官，將主動擊退入侵的敵方玩家；剛復活之玩家享有保護機制，不會立即顯示主動攻擊劍圖示。</li>
+          <li><b>外觀匿名與戰術溝通</b>：進場後所有玩家角色名稱將強制匿名，魔法娃娃統一變更為經驗公主外觀（能力完全保留），並隱藏城主王冠。戰場內全面禁止順移、召喚寵物，且<b>戰場內禁止使用大喊頻道</b>，請直接使用一般頻道與同陣營戰友溝通。</li>
+          <li><span class="highlight">【學院貢獻度達標與在線資格】（核心重點）</span>：
+            <ul>
+              <li>學員在戰場中的各項行動（擊殺/助攻玩家、擊殺怪物、爭奪據點、奪劍護送、摧毀/佔領守護塔）皆會持續累積<b>「學院貢獻分」</b>。當貢獻分達標時，系統會立即發出通知提示。</li>
+              <li>活動結束結算時，<b>個人學院貢獻分達標且「保持在線」</b>的活躍學員，方享有學院總積分分紅資格並可參與「榮譽稱號王」評選（<span class="highlight">貢獻度未達標或結算時處於離線狀態者，皆無法獲得任何結算獎勵、分紅與稱號</span>）。</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>【三、 戰場三大核心戰略爭奪】</h3>
+        <div class="objective-box">
+          <p><b>🏰【中央守護者之塔】（戰略防守與積分泉源）</b></p>
+          <ul>
+            <li>守護塔坐落於戰場中央廣場，初始為中立狀態，可由任一陣營攻打摧毀以奪取佔領權。</li>
+            <li><b>防護機制</b>：守護之塔受到遠距傷害<b>減半</b>，並享有單次傷害上限防護；佔領方同陣營成員無法攻擊己方守護塔，對己方守護塔可施放治癒術，單次補血量有上限僅微量補血。</li>
+            <li><b>佔領與防禦收益</b>：佔領陣營每 5 秒自動獲得 <span class="highlight">學院總積分 +7 分</span>；在守護塔周圍 8 格範圍內的玩家每 5 秒獲得 <span class="highlight">學院貢獻分 +2 分</span>（設有個人動態累積上限，積極參與擊殺與助攻可持續擴充上限）。</li>
+            <li><b>摧毀與重生</b>：推倒守護塔將進行全場廣播並計入最後一擊者個人「推塔數」，守護塔於 5 秒後將重生成為擊破陣營的所屬塔！</li>
+          </ul>
+        </div>
+
+        <div class="objective-box">
+          <p><b>⚔️【賢者之劍奪劍護送】（兵家必爭積分神器）</b></p>
+          <ul>
+            <li>戰場<b>上方平台</b>將降臨神聖神器「賢者之劍」，全場勇士皆可拾取。拾取後持劍者將散發詛咒枷鎖。</li>
+            <li><b>持劍負面挑戰</b>：持劍者身負巨力，每 5 秒將承受藥水霜化術、魔法封印（並有 60% 機率觸發骷髏破壞造成暈眩）效果，極度考驗走位與團隊護駕！</li>
+            <li><b>持劍與護送收益</b>：持劍者每 5 秒獲得 <span class="highlight">貢獻分 +5、學院總積分 +5</span>；在持劍者畫面範圍內的同陣營護送戰友，每 5 秒亦可獲得 <span class="highlight">貢獻分 +3</span>（護送貢獻同樣設有個人動態累積上限，參與擊殺與助攻可持續擴充上限）！</li>
+            <li><b>成功護送基地</b>：將賢者之劍一路護送回己方陣營基地（復活點周邊 4 格內），賢者之劍將化為強大能量回收，所屬學院立即獲得 <span class="highlight">學院總積分 +250 分</span>，持劍者獲得 <span class="highlight">貢獻分 +50 與奪劍次數 +1</span>！賢者之劍將於 1 分鐘後再次於上方平台重現。</li>
+            <li><b>斬殺與重置</b>：持劍者陣亡或離線時劍會掉落於地面，斬殺持劍者可獲得 <span class="highlight">貢獻分 +20 與學院總積分 +20</span>；掉落於地面超過 30 秒未被拾取，將自動回歸上方平台。</li>
+          </ul>
+        </div>
+
+        <div class="objective-box">
+          <p><b>🚩【據點首領突襲】（強效Buff逆轉戰局）</b></p>
+          <ul>
+            <li>位於戰場下方據點，由據點首領與其隨從部隊駐守，首領死亡後每隔 2 分鐘重新降臨。</li>
+            <li>最後一擊擊殺首領者獲得 <span class="highlight">貢獻分 +30、據點首領擊殺數 +1</span>，參與攻擊之同陣營助攻隊友獲得 <span class="highlight">貢獻分 +3</span>；所屬學院獲得 <span class="highlight">學院總積分 +150（若最後一擊者處於神聖光環下高達 +300 分）</span>！</li>
+            <li>成功擊殺據點首領之陣營全體成員，立即享有<b>【全體弱勢 BUFF 提升一階（持續 2 分鐘）】</b>的強大戰力加成！</li>
+          </ul>
+        </div>
+
+        <h3>【四、 學院神聖 BUFF、弱勢逆轉與傷害上限】</h3>
+        <ul>
+          <li><b>戰場傷害保護</b>：戰場全圖受神聖結界保護，單次攻擊傷害設有上限防護。</li>
+          <li><b>神聖 BUFF 啟動</b>：戰場內 10 格範圍內集結 3 名同陣營戰友（或持有專屬學院道具增益），每 5 秒自動觸發 10 秒神聖光環（同陣營可互相施放聖結界、生命的祝福、體力回復術）：
+            <ul>
+              <li><span class="faction-yushou">禦守學院神聖 BUFF</span>：承受普攻單次傷害上限不超過自身最大 HP 10%（最低不低於 1,000）；受到普攻時有 15% 機率完全免傷並 100% 反彈該傷害；普攻命中失敗時有 25% 強制修正為命中。</li>
+              <li><span class="faction-pojun">破軍學院神聖 BUFF</span>：普攻每下附加 150 點真實傷害（三重矢每箭附加 50 點真實傷害）；命中失敗有 25% 強制修正為命中；攻擊帶有禦守 BUFF 之目標時，有 15% 機率無視其防護打出原始傷害。</li>
+              <li><b>怪物增傷效果</b>：兩種神聖 BUFF 攻擊小怪皆附加其最大 HP 10% 固定傷害，攻擊小 BOSS 附加最大 HP 5% 固定傷害。</li>
+            </ul>
+          </li>
+          <li><b>逆轉弱勢增益（無需集結自動常駐）</b>：
+            <ul>
+              <li>當戰局開打後，若己方陣營總積分與總擊殺數皆落後，且學院積分落後達 300 分時啟動「<b>弱勢一階</b>」（神聖效果翻倍為 2 倍，神聖光環下擊殺小怪學院積分額外 +1）。</li>
+              <li>當積分落後達 500 分且擊殺數落後，或「弱勢一階」持續達 7 分鐘時，升級為「<b>弱勢二階</b>」（神聖效果翻倍為 3 倍，神聖光環下擊殺小怪學院積分額外 +2，且 <b>PVP 擊殺敵方玩家個人積分額外 +2</b>）。啟動後至少鎖定維持 1 分鐘以上。</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>【五、 首領召喚與怪物獵殺積分】</h3>
+        <ul>
+          <li><b>戰場小怪</b>：擊殺獲得個人貢獻分 +1（處於神聖 BUFF 時學院總積分額外 +2，若享有弱勢一/二階再額外 +1/+2）。全場累計擊殺小怪每達 50 隻將召喚小 BOSS「大大」前來復仇；累計達 1200 隻將於【中央廣場】召喚戰場霸主「暗黑刀神Jr」。</li>
+          <li><b>戰場首領</b>：
+            <ul>
+              <li>小 BOSS（大大）：每次發生 PVP 擊殺或累計殺怪時現身。擊殺個人積分 +1、貢獻分 +5、學院總積分 +5（神聖 BUFF 下為 +10）。</li>
+              <li>大 BOSS（暗黑刀神Jr）：全場玩家死亡累計達 50 人（現身於上方平台）或殺怪達 1200 隻（現身於中央廣場）時降臨。擊殺個人積分 +50、貢獻分 +100、學院總積分 +150（神聖 BUFF 下高達 +300），參與攻擊之同陣營助攻隊友貢獻分 +30！</li>
+              <li>怪物會掉落破軍/禦守脛甲(α、β、γ)，小怪不會掉落γ，數據可於防具介紹查看，另除小怪外皆有機率掉落道教九秘典籍與法寶，物品掉落享有 10 秒拾取優先權。</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>【六、 PVP 對決、勝負掠奪分紅與九大榮譽稱號王】</h3>
+        <ul>
+          <li><b>PVP 擊殺與助攻</b>：
+            <ul>
+              <li>擊殺敵對玩家：個人積分 +3（若己方處於<b>弱勢二階</b>則為 <span class="highlight">+5</span>）、貢獻分 +30、學院總積分 +10，並立刻召喚一隻小 BOSS「大大」加入戰局！</li>
+              <li>助攻獎勵（目標陣亡前 15 秒內造成傷害）：個人積分 +1、貢獻分 +10、學院總積分 +2。</li>
+            </ul>
+          </li>
+          <li><b>陣營勝負掠奪與結算分配機制</b>：
+            <ul>
+              <li><span class="highlight">【勝方掠奪 20% 分紅池】</span>：結算時學院總積分較高之獲勝陣營，將直接<b>掠奪敗方陣營 20% 的總積分分紅池</b>納為己有（敗方僅剩 80% 分紅池）；若雙方總積分平手，則觸發平手懲罰，雙方分紅池皆以 <b>80%</b> 計算！</li>
+              <li><b>60% 基礎分紅池</b>：由所屬學院所有在線達標學員，依個人<b>「貢獻分比例」</b>公平瓜分。</li>
+              <li><b>40% 擊殺分紅池</b>：由所屬學院在線達標學員，依個人<b>「有效擊殺貢獻比（擊殺數 + 0.25 × 助攻數）」</b>進行額外戰鬥分紅。</li>
+              <li>結算所得之總積分（個人戰鬥積分 + 學院基礎分紅 + 擊殺助攻分紅）將直接轉入角色之學院位階總分。</li>
+            </ul>
+          </li>
+          <li><b>👑【各陣營九大榮譽稱號王評選】</b>：
+            <p>活動結算時，雙方陣營將依下列優先順序各自獨立評選在線達標學員（每人限得一項稱號，數值需大於 0；同分時依序比較貢獻分與個人積分），榮獲稱號者將額外獲得<b>【學院硬幣 x 5】</b>，並於戰績榜顯示專屬代表符號：</p>
+            <div class="tag-container">
+              <span class="tag-title">★ 擊殺王</span>
+              <span class="tag-title">▲ 助攻王</span>
+              <span class="tag-title">※ 積分王</span>
+              <span class="tag-title">☆ 貢獻王</span>
+              <span class="tag-title">● 打野王</span>
+              <span class="tag-title">■ 據點王</span>
+              <span class="tag-title">◆ 奪劍王</span>
+              <span class="tag-title">◎ 推塔王</span>
+              <span class="tag-title">▼ 奉獻王</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="warning-box">
+          <h3 style="color:#b30000; margin-top:0; border-left:none; padding-left:0;">🛡️【重要規章：戰場風紀與防弊監控機制】</h3>
+          <p>戰場全面啟用<b>多維度動態行為監控系統</b>（針對同 IP 異常互殺、短時間連續餵分、多次死亡卻毫無實質作戰與貢獻等破壞競技平衡之行為進行全時段自動分析）：</p>
+          <ul>
+            <li>系統以玩家<b>全方位戰場實質貢獻度</b>為評估依據，若判定對抗行為異常、短時間重複擊殺同一目標或缺乏實質作戰貢獻，將<b>即時自動攔截並中斷計分</b>，該次擊殺不予發放任何積分、貢獻分與戰績。</li>
+            <li>系統配備<b>階梯式警示與嚴懲機制</b>：初期異常（第 1~2 次）將予以系統警報提示；若經警告仍持續違規（第 3~4 次），系統將<b>每次直接扣除個人戰場積分 30 點上繳學院，並通報全場</b>。</li>
+            <li><b>嚴重累犯者（累計達 5 次警告）</b>：系統將<b>強制驅逐出場、列入當場次黑名單禁止再次進場（含組隊跟隨）、沒收全額戰場積分平分給雙方學院、全伺服器公告懲戒，並直接重罰扣除角色本體學院總積分 100 點</b>！請各位勇士遵守公平競技原則，切勿投機取巧。</li>
+          </ul>
+        </div>
+
+        <div class="btn-container">
+          <button class="btn-close" onclick="window.close()">關閉視窗</button>
+        </div>
+      </body>
+    </html>
+  `);
+  popup.document.close();
+}
+    function openDisclaimer() {
+      
+      openCustomModal(`
+        <html>
+          <head><title>免責聲明</title></head>
+          <body style="font-family:Arial, sans-serif; padding:20px; line-height:1.7;">
+            <h2 style="color:red; text-align:center;">※※免責聲明※※</h2>
+            <h3 style="color:#b8860b; text-align:center;">【私下交易免責與電磁紀錄聲明】</h3>
+            <p>本伺服器絕對不干涉、不鼓勵且不保障玩家間的任何私下交易行為（包含但不限於帳號買賣、虛寶與現實金錢之交易）。</p>
+            <p>玩家進行私下交易需自行承擔受騙、詐欺等一切衍生風險。若因私下交易產生任何糾紛，一概不介入處理，並且有權拒絕提供伺服器電磁紀錄、資料庫日誌或連線IP供玩家查詢或比對。請玩家務必提高警覺，謹慎交易。</p>
+            <div style="text-align:center; margin-top:20px;"><button onclick="window.close()" style="padding:6px 15px;">關閉視窗</button></div>
+          </body>
+        </html>
+      `);
+    }
+  
+  </script>
+</head>
+<body>
+
+  <!-- 最上方：品牌標題橫幅 -->
+  <header class="brand-bar">
+    <div class="company-name">懷舊の天堂</div>
+  </header>
+
+  <!-- 中間：分類導航按鈕列 -->
+  <nav class="header-nav" id="headerNav"></nav>
+
+  <!-- 下方：主內容展示區 -->
+  <main class="content" id="content">
+    <div class="content-box">
+      <div class="title-main">
+        20多年過去了，我們都長大了。<br>
+        或許你現在忙著工作、忙著顧家，不再有當年通宵練功的體力。<br>
+        但心中那份對經典天堂的熱血，是否依然澎湃？<br><br>
+        如果你想重溫當年的感動，在繁忙的日常中偷得浮生半日閒，自在悠閒地打寶遊玩——<br>
+        誠摯歡迎回家！這裡，是專為「現在的你」用心打造的樂園。<br><br>
+        🔥 【上班族救星．內掛解放雙手】 🔥<br>
+        不用擔心落後進度！完善優化的內掛機制，上班自動掛機、下班齊聚推王。無論開會或顧家，角色都在穩健成長。<br><br>
+        💰 【拒絕課金戰士．農夫也能出頭天】 💰<br>
+        堅持「無課友善」綠色平衡！所有核心裝備、珍貴道具皆可由打怪與副本取得。沒有特權，只有實力與熱血。<br><br>
+        🛠️ 【獨家自創玩法．拒絕千篇一律】 🛠️<br>
+        厭倦了一成不變的公式化服？我們擁有持續開發的原創副本與趣味活動，傾聽玩家建議持續進化優化。<br><br>
+        🤝 【細水長流．承諾長久穩定營運】 🤝<br>
+        不求炒短線牟利，只願凝聚一群志同道合的老朋友。GM 隨時陪伴在側，傾聽建言、持續維護，打造長久陪伴的家。
+      </div>
+    </div>
+  </main>
+
+  <!-- LINE 群浮動入口 -->
+  <aside class="Show-Site">
+    <a href="https://line.me/ti/g2/QD5OdsA9fhKU8b_jSm0zY1Q8vqQow2ViCS16kQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener">
+      <img src="Image/LineGroup.jpg" alt="LINE 群 QR Code" class="promo-btn" title="加入官方LINE群">
+      <span class="site-text">LINE官方群</span>
+    </a>
+  </aside>
+
+  <!-- 右下角贊助入口 -->
+  <aside class="donate-box">
+    <button class="donate-btn" onclick="document.getElementById('donateModal').style.display='block'">
+      ✨ 贊助支持 ✨
+    </button>
+  </aside>
+
+  <!-- 通用內容 Modal 彈跳視窗 (取代 window.open 避免被瀏覽器阻擋) -->
+  <div id="infoModal" class="info-modal" onclick="handleModalClick(event, 'infoModal')">
+    <div class="info-modal-wrapper">
+      <span class="info-modal-close-btn" onclick="closeCustomModal()">&times;</span>
+      <div id="infoModalBody" class="info-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- 疑難雜症 F&Q Modal 彈跳視窗 -->
+  <div id="faqModal" class="info-modal" onclick="handleModalClick(event, 'faqModal')">
+    <div class="info-modal-wrapper" style="max-width: 960px; height: 88vh;">
+      <span class="info-modal-close-btn" onclick="closeFaqModal()">&times;</span>
+      <iframe src="F&Q.html" class="faq-modal-iframe"></iframe>
+    </div>
+  </div>
+
+  <!-- 贊助 Modal 彈跳視窗 -->
+  <div id="donateModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('donateModal').style.display='none'">&times;</span>
+      <h3 style="color:#333; margin-bottom:10px;">贊助開發與營運</h3>
+      <p style="color:#666; font-size:14px; line-height:1.5;">掃描下方 QR Code 加入官方客服帳號<br><b style="color:#0078D4;">@774twnfm</b></p>
+      <img src="Image/LineDonate.jpg" alt="LINE Pay QR Code" class="qrcode">
+    </div>
+  </div>
+
+</body>
+</html>
